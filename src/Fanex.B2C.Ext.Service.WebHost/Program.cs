@@ -1,25 +1,31 @@
+
+using Fanex.B2C.Ext.Service.WebHost;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var env = builder.Environment;
+// Add config to the container
+builder.Configuration.SetBasePath(env.ContentRootPath);
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+builder.Configuration.AddJsonFile($"App_Data/Users/Users.{env.EnvironmentName}.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile($"App_Data/Whitelist/Whitelist.{env.EnvironmentName}.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddEnvironmentVariables();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
+builder.WebHost.UseSentry();
+
+// Add services to the container.
+var startup = new Startup(builder.Configuration);
+startup.ConfigureServices(builder.Services);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+startup.Configure(app, app.Environment);
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+//app.MapControllers();
 
 app.Run();

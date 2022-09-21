@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.B2C.Ext.Service.WebHost", "src\Fanex.B2C.Ext.Service.WebHost\Fanex.B2C.Ext.Service.WebHost.csproj", "{ED965C69-F9A7-4EA1-98DB-3861482B5CC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.B2C.Ext.Service.Core", "src\Fanex.B2C.Ext.Service.Core\Fanex.B2C.Ext.Service.Core.csproj", "{102797B9-E2DB-4941-9367-98672D4AB2E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{ED965C69-F9A7-4EA1-98DB-3861482B5CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED965C69-F9A7-4EA1-98DB-3861482B5CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED965C69-F9A7-4EA1-98DB-3861482B5CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{102797B9-E2DB-4941-9367-98672D4AB2E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{102797B9-E2DB-4941-9367-98672D4AB2E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{102797B9-E2DB-4941-9367-98672D4AB2E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{102797B9-E2DB-4941-9367-98672D4AB2E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

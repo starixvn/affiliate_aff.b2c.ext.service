@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions SiteId="32" SiteName="B2C_Api">
+  <Function Name="Affiliate_Information_N88">
+    <Setting Key="Aff_API_AffiliateInfo_Sel_N88" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N88.bodbAdminNet" />
+  </Function>
+  <Function Name="Affiliate_Information_N8B">
+    <Setting Key="Aff_API_AffiliateInfo_Sel_N8B" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N8B.bodbAdminNet" />
+  </Function>
+  <Function Name="Affiliate_Information_N8G">
+    <Setting Key="Aff_API_AffiliateInfo_Sel_N8G" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N8G.bodbAdminNet" />
+  </Function>
+</Functions>
