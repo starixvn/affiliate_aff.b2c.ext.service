@@ -1,4 +1,3 @@
-
 using Fanex.B2C.Ext.Service.WebHost;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,8 +7,9 @@ var env = builder.Environment;
 builder.Configuration.SetBasePath(env.ContentRootPath);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-builder.Configuration.AddJsonFile($"App_Data/Users/Users.{env.EnvironmentName}.json", optional: false, reloadOnChange: true);
-builder.Configuration.AddJsonFile($"App_Data/Whitelist/Whitelist.{env.EnvironmentName}.json", optional: false, reloadOnChange: true);
+var envFromSetting = builder.Configuration.GetValue<string>("AppSettings:Environment");
+builder.Configuration.AddJsonFile($"App_Data/Users/Users.{envFromSetting}.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile($"App_Data/Whitelist/Whitelist.{envFromSetting}.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddEnvironmentVariables();
 
 builder.Logging.ClearProviders();

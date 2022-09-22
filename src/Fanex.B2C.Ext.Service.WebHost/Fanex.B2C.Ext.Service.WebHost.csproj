@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>77017d73-0249-4da1-8506-0189f9e7bbad</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +15,7 @@
     <PackageReference Include="Fanex.Logging" Version="2.0.1" />
     <PackageReference Include="Fanex.Logging.Sentry" Version="1.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
     <PackageReference Include="ONEbook.UM.AspNetCore" Version="3.1.0" />
     <PackageReference Include="ONEbook.UM.Transport" Version="3.1.1" />
     <PackageReference Include="Sentry.AspNetCore" Version="3.21.0" />
@@ -20,6 +24,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fanex.B2C.Ext.Service.Core\Fanex.B2C.Ext.Service.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App_Data\SpConfig\SpName.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -100,6 +100,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
             } else
             {
                 app.UseHsts();
+
                 app.UseWhen(
                     context => !context.Request.FromInternal(),
                     builder => builder.UseHttpsRedirection()
@@ -173,7 +174,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
                 ));
             DbSettingProviderManager
               .StartNewSession()
-              .WithSqlServer(resourcePath: "../../../App_Data/SpConfig/SpName.xml")
+              .WithSqlServer(resourcePath: "~/App_Data/SpConfig/SpName.xml")
               .Use(connectionStrings)
               .Run();
         }
