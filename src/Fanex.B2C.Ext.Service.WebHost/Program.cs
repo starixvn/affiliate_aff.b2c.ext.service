@@ -1,4 +1,5 @@
 using Fanex.B2C.Ext.Service.WebHost;
+using Sentry.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,10 +23,11 @@ var startup = new Startup(builder.Configuration);
 startup.ConfigureServices(builder.Services);
 
 var app = builder.Build();
+app.MapGet("/", () => "Hello, Welcome to B2C API Service!");
 
 // Configure the HTTP request pipeline.
 startup.Configure(app, app.Environment);
 
-//app.MapControllers();
+app.MapDefaultControllerRoute();
 
 app.Run();

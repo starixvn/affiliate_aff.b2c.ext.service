@@ -6,9 +6,9 @@ namespace Fanex.Athena.ExtService.Controllers
     {
         private const int UnauthorizedCode = 401;
         
-        public IResult Index(int code)
+        public ActionResult Index(int code)
         {
-            return code == UnauthorizedCode ? Results.Unauthorized() : Results.NotFound();
+            return code == UnauthorizedCode ? Unauthorized("You don't have permission to access") : NotFound("Page not found");
         }
     }
 }

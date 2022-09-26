@@ -12,6 +12,7 @@ using System.Text;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Fanex.B2C.Ext.Service.Core.Extensions;
 using Fanex.B2C.Ext.Service.Core.Attributes;
+using Sentry.AspNetCore;
 
 namespace Fanex.B2C.Ext.Service.WebHost
 {
@@ -31,10 +32,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
         {
             services.AddControllers();
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
-
+            services.Configure<SentryAspNetCoreOptions>(Configuration.GetSection("Sentry"));
             services.Configure<TokenManagement>(Configuration.GetSection("tokenManagement"));
             services.Configure<ApplicationOptions>(Configuration.GetSection(ApplicationOptionSettingKey));
 
@@ -93,12 +91,8 @@ namespace Fanex.B2C.Ext.Service.WebHost
             }
 
             app.UseWhoAmICheck();
-            if (env.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            } else
-            {
+            if (!env.IsDevelopment())
+            {    
                 app.UseHsts();
 
                 app.UseWhen(
@@ -110,14 +104,9 @@ namespace Fanex.B2C.Ext.Service.WebHost
             app.UseStaticResource(env.IsDevelopment());
             app.UseUnderMaintenance();
             app.UseStatusCodePagesWithReExecute("/Error", "?code={0}");
-            app.UseRouting();
             app.UseJWTokenOnPage();
             app.UseAuthorization();
             app.UseResponseCaching();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
         }
 
         private void DIRegister(IServiceCollection services)
