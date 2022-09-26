@@ -4,10 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>77017d73-0249-4da1-8506-0189f9e7bbad</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="App_Data\SpConfig\SpName.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
@@ -16,12 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fanex.B2C.Ext.Service.Core\Fanex.B2C.Ext.Service.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="App_Data\SpConfig\SpName.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

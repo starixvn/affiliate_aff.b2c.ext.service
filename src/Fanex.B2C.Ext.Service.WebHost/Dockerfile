@@ -1,4 +1,4 @@
-FROM hub.nexdev.net/base/dotnet/core/sdk:6.0 AS builder
+FROM hub.nexdev.net/base/dotnet/core/sdk:6.0-alpine AS builder
 
 WORKDIR "/src"
 

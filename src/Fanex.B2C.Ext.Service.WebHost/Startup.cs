@@ -97,8 +97,16 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
                 app.UseWhen(
                     context => !context.Request.FromInternal(),
-                    builder => builder.UseHttpsRedirection()
-                    );
+                    builder =>
+                    {
+                        //Fix adding UseHttpsRedirection conditionally via UseWhen fails in ASP.NET Core 6. Fixed in v6.0.9
+                        if (builder.ServerFeatures is null)
+                        {
+                            builder.Properties["server.Features"] = app.ServerFeatures;
+                        }
+
+                        builder.UseHttpsRedirection();
+                    });
             }
 
             app.UseStaticResource(env.IsDevelopment());
