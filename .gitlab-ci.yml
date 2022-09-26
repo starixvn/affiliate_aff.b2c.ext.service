@@ -1,0 +1,4 @@
+include:
+    - project: "ci/repos-ci/legion_n88_ext"
+      ref: master
+      file: "gitlab-ci.yml"
