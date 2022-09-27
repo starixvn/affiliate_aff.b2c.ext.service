@@ -1,12 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using Fanex.B2C.Ext.Service.Core.DTO;
-using Fanex.B2C.Ext.Service.Core.Extensions;
+﻿using Fanex.B2C.Ext.Service.Core.Extensions;
+using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using NetTools;
+using System.Net;
 
 namespace Fanex.B2C.Ext.Service.Core.Attributes
 {

@@ -1,4 +1,4 @@
-﻿using Fanex.B2C.Ext.Service.Core.DTO;
+﻿using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Models.MetaModel;
 using Fanex.Data;
 

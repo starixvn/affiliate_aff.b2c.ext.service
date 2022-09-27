@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace Fanex.B2C.Ext.Service.Core.DTO
+﻿namespace Fanex.B2C.Ext.Service.Core.Models.DTO
 {
     public class ApplicationOptions
     {

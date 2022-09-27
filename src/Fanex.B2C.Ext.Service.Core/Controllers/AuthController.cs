@@ -4,7 +4,7 @@ using Fanex.B2C.Ext.Service.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Fanex.B2C.Ext.Service.WebHost.Controllers
+namespace Fanex.B2C.Ext.Service.Core.Controllers
 {
     [ApiController]
     [ServiceFilter(typeof(IPFilterAttribute))]
@@ -29,7 +29,7 @@ namespace Fanex.B2C.Ext.Service.WebHost.Controllers
             var result = _authService.IsAuthenticated(request);
 
             return result.Item1 ? Ok(result.Item2)
-                : (ActionResult)BadRequest("Wrong username or password");
+                : BadRequest("Wrong username or password");
         }
     }
 }

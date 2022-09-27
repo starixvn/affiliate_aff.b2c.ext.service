@@ -1,5 +1,5 @@
-﻿using Fanex.B2C.Ext.Service.Core.DTO;
-using Fanex.B2C.Ext.Service.Core.Extensions;
+﻿using Fanex.B2C.Ext.Service.Core.Extensions;
+using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Microsoft.Extensions.Options;
 
 namespace Fanex.B2C.Ext.Service.Core.Services
