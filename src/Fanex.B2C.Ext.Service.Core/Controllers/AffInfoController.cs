@@ -34,6 +34,8 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
                 param.LicenseeCode = Licensee.LicenseeDefault;
             }
 
+            _logger.LogCritical("Ext B2C - Get aff info");
+
             return _affililateInfoService.GetAffInfo(param);
         }
     }
