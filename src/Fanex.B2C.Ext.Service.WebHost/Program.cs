@@ -1,5 +1,4 @@
 using Fanex.B2C.Ext.Service.WebHost;
-using Sentry.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,4 @@
-﻿using Fanex.B2C.Ext.Service.Core.DTO;
-using Fanex.B2C.Ext.Service.Core.Middleware;
+﻿using Fanex.B2C.Ext.Service.Core.Middleware;
 using Fanex.B2C.Ext.Service.Core.Models;
 using Fanex.Data;
 using Fanex.Data.SqlServer;
@@ -13,6 +12,7 @@ using Fanex.B2C.Ext.Service.Core.Services;
 using Fanex.B2C.Ext.Service.Core.Extensions;
 using Fanex.B2C.Ext.Service.Core.Attributes;
 using Sentry.AspNetCore;
+using Fanex.B2C.Ext.Service.Core.Models.DTO;
 
 namespace Fanex.B2C.Ext.Service.WebHost
 {
@@ -38,8 +38,6 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
             services.Configure<List<User>>(Configuration.GetSection("Users"));
 
-            var appOption = Configuration.GetSection(ApplicationOptionSettingKey).Get<ApplicationOptions>();
-
             ConfigFanexData();
 
             services.AddResponseCaching(options =>
@@ -58,7 +56,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
-                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost;
+                options.ForwardedHeaders = ForwardedHeaders.All;
                 options.KnownNetworks.Clear();
                 options.KnownProxies.Clear();
             });

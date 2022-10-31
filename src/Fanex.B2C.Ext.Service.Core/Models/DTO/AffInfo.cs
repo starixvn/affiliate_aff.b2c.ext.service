@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Fanex.B2C.Ext.Service.Core.DTO
+namespace Fanex.B2C.Ext.Service.Core.Models.DTO
 {
     [Serializable]
     public class AffInfo

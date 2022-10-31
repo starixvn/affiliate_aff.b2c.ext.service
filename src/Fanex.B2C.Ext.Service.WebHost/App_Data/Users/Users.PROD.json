@@ -1,0 +1,28 @@
+{
+  "Users": [
+    {
+      "username": "B2C_API",
+      "password": "lMMUavji3Hbd04FbmViJPi1NwajauTyiz5qYHGsW9Gc="
+    },
+    {
+      "username": "B2C_EXT",
+      "password": "qHAK+0tjzV2YA0XU0IuqQAzXnB886iIHP+VOoAq7cvE="
+    },
+    {
+      "username": "B2C_SERVICE",
+      "password": "O1Aoq3VpMAR5gFtRtkL+BivbQpmXXGOr6EOOuduZ/5Q="
+    },
+    {
+      "username": "N88_API",
+      "password": "nFOjELsfDdFrar80Gd/BKyGG3ZLGQ+ZuliTpv82L5js="
+    },
+    {
+      "username": "N8B_API",
+      "password": "JZfuELQVS67l2/oBzlW8THFe+8XZXdHrYPQxRlDVU1Y="
+    },
+    {
+      "username": "N8G_API",
+      "password": "Y9YN76RtW039j90/PrIjD2R1aO6OdaN6qn9ZHc/02uE="
+    }
+  ]
+}
