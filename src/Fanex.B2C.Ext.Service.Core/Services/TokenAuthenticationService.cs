@@ -21,7 +21,10 @@ namespace Fanex.B2C.Ext.Service.Core.Services
 
         public Tuple<bool, Token> IsAuthenticated(TokenRequest request)
         {
-            var token = new Token();
+            var token = new Token
+            {
+                ExpiresIn = _tokenManagement.AccessExpiration
+            };
             var siteName = request.Username;
             var realUserName = request.Username;
 
@@ -58,6 +61,7 @@ namespace Fanex.B2C.Ext.Service.Core.Services
                   encryptCredenction
                   );
             token.AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+            token.TokenType = handler.TokenType.Name;
             return Tuple.Create<bool, Token>(true, token);
         }
     }
