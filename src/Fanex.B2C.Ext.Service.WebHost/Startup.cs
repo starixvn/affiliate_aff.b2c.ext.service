@@ -81,6 +81,11 @@ namespace Fanex.B2C.Ext.Service.WebHost
         {
             app.UsePingCheck();
             app.UseForwardedHeaders();
+            if (string.Equals(Configuration["UseSwagger"], "1"))
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
             if (string.Equals(Configuration["UseErrorHandler"], "1"))
             {
@@ -108,10 +113,6 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
                         builder.UseHttpsRedirection();
                     });
-            } else
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
             }
 
             app.UseStaticResource(env.IsDevelopment());

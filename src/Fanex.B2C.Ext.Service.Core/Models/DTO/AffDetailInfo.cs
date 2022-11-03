@@ -18,7 +18,7 @@ namespace Fanex.B2C.Ext.Service.Core.Models.DTO
         public string Player_Username { get; set; }
 
         [JsonPropertyName("Currency")]
-        public string Currency { get; set; }
+        public string CurrencyCode { get; set; }
 
         [JsonPropertyName("RegisteredDate")]
         public DateTime? RegisteredDate { get; set; }

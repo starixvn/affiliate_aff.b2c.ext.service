@@ -24,7 +24,7 @@ namespace Fanex.B2C.Ext.Service.Core.Services
 
             using var db = ObjectDbFactory.CreateInstance(spName);
 
-            return db.Query<AffDetailInfo>();
+            return db.Query<AffDetailInfo>(param);
         }
     }
 }
