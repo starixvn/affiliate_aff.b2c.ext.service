@@ -20,12 +20,6 @@ namespace Fanex.B2C.Ext.Service.Core.Models.DTO
         [JsonPropertyName("Currency")]
         public string Currency { get; set; }
 
-        [JsonPropertyName("IsClosed")]
-        public bool IsClosed { get; set; }
-
-        [JsonPropertyName("IsLocked")]
-        public bool IsLocked { get; set; }
-
         [JsonPropertyName("RegisteredDate")]
         public DateTime? RegisteredDate { get; set; }
 
