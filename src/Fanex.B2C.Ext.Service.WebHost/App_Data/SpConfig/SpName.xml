@@ -5,14 +5,14 @@
   </Function>
   <Function Name="N88_Affiliate_Information">
     <Setting Key="N88_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N88.bodbAdminNet" />
-    <Setting Key="N88_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel_xtest" DbName="DBAFFN88.Affiliate_N88.bodbAdminNet" />
+    <Setting Key="N88_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N88.bodbAdminNet" />
   </Function>
   <Function Name="N8B_Affiliate_Information">
     <Setting Key="N8B_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N8B.bodbAdminNet" />
-    <Setting Key="N8B_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel_xtest" DbName="DBAFFN88.Affiliate_N8B.bodbAdminNet" />
+    <Setting Key="N8B_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N8B.bodbAdminNet" />
   </Function>
   <Function Name="N8G_Affiliate_Information">
     <Setting Key="N8G_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N8G.bodbAdminNet" />
-    <Setting Key="N8G_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel_xtest" DbName="DBAFFN88.Affiliate_N8G.bodbAdminNet" />
+    <Setting Key="N8G_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N8G.bodbAdminNet" />
   </Function>
 </Functions>
