@@ -29,7 +29,7 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
         [Route("api/AffInfo")]
         public AffInfo GetAffInfo([FromBody] AffInfoParam param)
         {
-            _logger.LogCritical("Ext B2C - Get aff info");
+            _logger.LogInformation("Ext B2C - Get aff info");
 
             param.LicenseeCode = GetLicenseeCode(param.LicenseeCode);
 
@@ -40,7 +40,7 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
         [Route("api/AffDetailInfoList")]
         public IEnumerable<AffDetailInfo> GetAffDetailInfoList([FromBody] AffDetailInfoParam param)
         {
-            _logger.LogCritical("Ext B2C - Get aff detail info list");
+            _logger.LogInformation("Ext B2C - Get aff detail info list");
 
             param.LicenseeCode = GetLicenseeCode(param.LicenseeCode);
 

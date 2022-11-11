@@ -31,7 +31,7 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
         {
             if(ModelState.IsValid)
             {
-                _logger.LogCritical("Ext B2C - Get Daily Exchange Rate");
+                _logger.LogInformation("Ext B2C - Get Daily Exchange Rate");
 
                 param.ExchangeIds = WebUtility.HtmlEncode(param.ExchangeIds.Trim());
 
