@@ -31,6 +31,9 @@ namespace Fanex.B2C.Ext.Service.WebHost
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
 
             services.Configure<SentryAspNetCoreOptions>(Configuration.GetSection("Sentry"));
             services.Configure<TokenManagement>(Configuration.GetSection("tokenManagement"));
@@ -78,6 +81,11 @@ namespace Fanex.B2C.Ext.Service.WebHost
         {
             app.UsePingCheck();
             app.UseForwardedHeaders();
+            if (string.Equals(Configuration["UseSwagger"], "1"))
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
             if (string.Equals(Configuration["UseErrorHandler"], "1"))
             {
@@ -117,6 +125,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
         private void DIRegister(IServiceCollection services)
         {
+            services.AddScoped<IExchangeService, ExchangeService>();
             services.AddScoped<IAffililateInfoService, AffililateInfoService>();
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();

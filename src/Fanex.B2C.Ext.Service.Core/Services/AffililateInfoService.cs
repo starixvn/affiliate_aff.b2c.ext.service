@@ -8,16 +8,23 @@ namespace Fanex.B2C.Ext.Service.Core.Services
     {
         public AffInfo GetAffInfo(AffInfoParam param)
         {
-            var UspName = $"Aff_API_AffiliateInfo_Sel_{param.LicenseeCode}";
+            var spName = $"{param.LicenseeCode}_Aff_API_AffiliateInfo_Sel";
 
-            using (var db = ObjectDbFactory.CreateInstance(UspName))
-            {
-                db.SetParameterValue("@MonthDate", param.MonthDate);
-                db.SetParameterValue("@Player_Username", param.PlayerName);
-                db.SetParameterValue("@BaseCurrencyName", param.BaseCurrencyName);
+            using var db = ObjectDbFactory.CreateInstance(spName);
+            db.SetParameterValue("@MonthDate", param.MonthDate);
+            db.SetParameterValue("@Player_Username", param.PlayerName);
+            db.SetParameterValue("@BaseCurrencyName", param.BaseCurrencyName);
 
-                return db.QueryEntity<AffInfo>() ?? new AffInfo();
-            }
+            return db.QueryEntity<AffInfo>();
+        }
+
+        public IEnumerable<AffDetailInfo> GetAffDetailInfoList(AffDetailInfoParam param)
+        {
+            var spName = $"{param.LicenseeCode}_Aff_API_AffiliateDetailInfo_Sel";
+
+            using var db = ObjectDbFactory.CreateInstance(spName);
+
+            return db.Query<AffDetailInfo>(param);
         }
     }
 }

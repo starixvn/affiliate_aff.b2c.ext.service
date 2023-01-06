@@ -12,7 +12,6 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
     [Authorize]
     [ApiController]
     [ServiceFilter(typeof(IPFilterAttribute))]
-    [Route("api/[controller]")]
     public class AffInfoController : ControllerBase
     {
         private readonly ILogger<AffInfoController> _logger;
@@ -27,16 +26,35 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
         }
 
         [HttpPost]
-        public AffInfo Post([FromBody] AffInfoParam param)
+        [Route("api/AffInfo")]
+        public AffInfo GetAffInfo([FromBody] AffInfoParam param)
         {
-            if (!Licensee.LicenseeCodes.Contains(param.LicenseeCode))
-            {
-                param.LicenseeCode = Licensee.LicenseeDefault;
-            }
+            _logger.LogInformation("Ext B2C - Get aff info");
 
-            _logger.LogCritical("Ext B2C - Get aff info");
+            param.LicenseeCode = GetLicenseeCode(param.LicenseeCode);
 
             return _affililateInfoService.GetAffInfo(param);
+        }
+
+        [HttpPost]
+        [Route("api/AffDetailInfoList")]
+        public IEnumerable<AffDetailInfo> GetAffDetailInfoList([FromBody] AffDetailInfoParam param)
+        {
+            _logger.LogInformation("Ext B2C - Get aff detail info list");
+
+            param.LicenseeCode = GetLicenseeCode(param.LicenseeCode);
+
+            return _affililateInfoService.GetAffDetailInfoList(param);
+        }
+
+        private static string GetLicenseeCode(string licenseeCode)
+        {
+            if (!Licensee.LicenseeCodes.Contains(licenseeCode))
+            {
+                return Licensee.LicenseeDefault;
+            }
+
+            return licenseeCode;
         }
     }
 }
