@@ -36,6 +36,16 @@
                 "${workspaceFolder}/src/Fanex.B2C.Ext.Service.WebHost/Fanex.B2C.Ext.Service.WebHost.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "generate coverage report",
+            "command": "reportgenerator",
+            "type": "shell",
+            "args": [
+                "-reports:${workspaceFolder}/src/TestResults/lcov.info",
+                "-targetdir:${workspaceFolder}/src/TestResults/coveragereport"
+            ],
+            "problemMatcher": []
         }
     ]
 }

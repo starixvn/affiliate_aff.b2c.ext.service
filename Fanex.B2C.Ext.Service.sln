@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32526.322
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33328.57
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.B2C.Ext.Service.WebHost", "src\Fanex.B2C.Ext.Service.WebHost\Fanex.B2C.Ext.Service.WebHost.csproj", "{ED965C69-F9A7-4EA1-98DB-3861482B5CC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.B2C.Ext.Service.Core", "src\Fanex.B2C.Ext.Service.Core\Fanex.B2C.Ext.Service.Core.csproj", "{102797B9-E2DB-4941-9367-98672D4AB2E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.B2C.Ext.Service.Core", "src\Fanex.B2C.Ext.Service.Core\Fanex.B2C.Ext.Service.Core.csproj", "{102797B9-E2DB-4941-9367-98672D4AB2E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E612F8DA-7967-4574-9068-26F67D15EE10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{E7C07FF7-1968-4E2E-8CA2-65FE4A8CF31D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.B2C.Ext.Service.Core.Tests", "src\Fanex.B2C.Ext.Service.Core.Tests\Fanex.B2C.Ext.Service.Core.Tests.csproj", "{5E5029B1-D623-4339-9E92-7E7E222FE50B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,11 +27,23 @@ Global
 		{102797B9-E2DB-4941-9367-98672D4AB2E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{102797B9-E2DB-4941-9367-98672D4AB2E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{102797B9-E2DB-4941-9367-98672D4AB2E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA525E8E-A1BE-42F2-90B4-F460FF7D5179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA525E8E-A1BE-42F2-90B4-F460FF7D5179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA525E8E-A1BE-42F2-90B4-F460FF7D5179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA525E8E-A1BE-42F2-90B4-F460FF7D5179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E5029B1-D623-4339-9E92-7E7E222FE50B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E5029B1-D623-4339-9E92-7E7E222FE50B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E5029B1-D623-4339-9E92-7E7E222FE50B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E5029B1-D623-4339-9E92-7E7E222FE50B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3094E6CB-189B-4344-9C59-4AAD7DE51762}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E7C07FF7-1968-4E2E-8CA2-65FE4A8CF31D} = {E612F8DA-7967-4574-9068-26F67D15EE10}
+		{5E5029B1-D623-4339-9E92-7E7E222FE50B} = {E7C07FF7-1968-4E2E-8CA2-65FE4A8CF31D}
 	EndGlobalSection
 EndGlobal
