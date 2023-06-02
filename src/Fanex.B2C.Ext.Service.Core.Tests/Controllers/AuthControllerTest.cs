@@ -17,7 +17,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         }
 
         [Fact]
-        public void RequestToken_WhenCallWith_InvalidModel_ReturnCorrect()
+        public void RequestToken_WhenCallWith_InvalidModel_ReturnBadRequest()
         {
             //Arrange
             var controller = new AuthController(_authenticateService);

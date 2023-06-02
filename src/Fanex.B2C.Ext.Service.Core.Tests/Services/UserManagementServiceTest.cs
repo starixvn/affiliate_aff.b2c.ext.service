@@ -42,6 +42,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
         [InlineData("test", "123", false)]
         [InlineData(null, null, false)]
         [InlineData(null, "1234", false)]
+        [InlineData("test", "", false)]
         [InlineData("test", "1234", true)]
         public void IsValidUser_WhenCalled_ReturnCorrectResult(string userName, string pass, bool expectedResult)
         {

@@ -3,6 +3,8 @@ using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using ONEbook.UM.Services;
 using System.Net;
+using System.Text;
+using System.Text.Json;
 
 namespace Fanex.B2C.Ext.Service.Core.Middleware
 {
@@ -34,27 +36,28 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
             var isUM = await _maintenanceService.IsUnderMaintenanceAsync();
             if (isUM)
             {
+                context.Response.StatusCode = (int)HttpStatusCode.ServiceUnavailable;
+
                 var umTime = await _maintenanceService.GetUnderMaintenanceTimeAsync();
                 string msg;
-                string contentType;
+
                 if (IsAjaxRequest(context.Request))
                 {
-                    contentType = "application/json";
                     msg = JsonConvert.SerializeObject(new
                     {
                         msg = string.Format(AjaxRequestMsgFormat, umTime.From, umTime.To),
                         isSuccess = false
                     });
+
+                    await context.Response.WriteAsJsonAsync(msg);
                 }
                 else
                 {
-                    contentType = "text/html";
+                    context.Response.ContentType = "text/html";
                     msg = string.Format(HtmlRequestMsgFormat, umTime.From, umTime.To);
-                }
 
-                context.Response.ContentType = contentType;
-                context.Response.StatusCode = (int)HttpStatusCode.ServiceUnavailable;
-                await context.Response.WriteAsync(msg);
+                    await context.Response.WriteAsync(msg);
+                }
             }
             else
             {

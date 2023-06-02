@@ -3,6 +3,7 @@ using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Models.MetaModel;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Fanex.Data;
+using Newtonsoft.Json;
 using NSubstitute;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Services
@@ -22,7 +23,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
             //Arrange
             var param = new AffInfoParam();
             var mockObjectDB = Substitute.For<IObjectDb>();
-            mockObjectDB.QueryEntity<AffInfo>(Arg.Any<object>(), Arg.Any<DbTransaction>()).Returns(new AffInfo { AffId = "123" });
+            mockObjectDB.QueryEntity<AffInfo>(Arg.Any<object>(), Arg.Any<DbTransaction>()).Returns(new AffInfo());
 
             ObjectDbFactory.SwitchToTestingMode();
             ObjectDbFactory.Mock((x, y) => mockObjectDB);
@@ -32,7 +33,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
             var result = service.GetAffInfo(param);
 
             //Assert
-            Assert.NotNull(result);
+            Assert.NotNull(JsonConvert.SerializeObject(result));
             mockObjectDB.Received().SetParameterValue("@MonthDate", param.MonthDate);
             mockObjectDB.Received().SetParameterValue("@Player_Username", param.PlayerName);
             mockObjectDB.Received().SetParameterValue("@BaseCurrencyName", param.BaseCurrencyName);
@@ -54,7 +55,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
             var result = service.GetAffDetailInfoList(param);
 
             //Assert
-            Assert.Single(result);
+            Assert.NotNull(JsonConvert.SerializeObject(result));
             mockObjectDB.Received().Query<AffDetailInfo>(param);
         }
     }

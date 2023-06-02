@@ -109,9 +109,7 @@
         {
             var request = context.Request;
 
-            return request == null
-                    ? new Dictionary<string, object>()
-                    : new Dictionary<string, object>
+            return new Dictionary<string, object>
                     {
                         [nameof(request.Host)] = request.Host,
                         [nameof(request.Path)] = request.Path,

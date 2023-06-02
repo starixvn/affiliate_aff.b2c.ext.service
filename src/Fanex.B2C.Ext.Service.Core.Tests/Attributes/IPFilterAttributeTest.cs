@@ -36,7 +36,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Attributes
             _actionExecutingContext = new ActionExecutingContext(
                 actionContext,
                 new List<IFilterMetadata>(),
-                new Dictionary<string, object?>(),
+                new Dictionary<string, object>(),
                 Substitute.For<Controller>()
             );
 
@@ -45,6 +45,31 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Attributes
 
             _mockHttpContext.Request.Returns(httpRequest);
         }
+
+        [Fact]
+        public void OnActionExecuting_WhenFromInternal_NoChangeResult()
+        {
+            //Arrange
+            var fakeContent = "No_Change";
+            var fakeResult = new ContentResult { Content = fakeContent };
+            _actionExecutingContext.Result = fakeResult;
+
+            _options.Value.Returns(new ApplicationOptions { WhiteList = new List<string>() });
+
+            var httpRequest = Substitute.For<HttpRequest>();
+            httpRequest.Host.Returns(HostString.FromUriComponent(""));
+
+            _mockHttpContext.Request.Returns(httpRequest);
+
+            //Action
+            var filter = new IPFilterAttribute(_logger, _options);
+            filter.OnActionExecuting(_actionExecutingContext);
+
+            //Assert
+            var actualResult = Assert.IsAssignableFrom<ContentResult>(_actionExecutingContext.Result);
+            Assert.Equal(fakeContent, actualResult.Content);
+        }
+
 
         [Fact]
         public void OnActionExecuting_WhenEmptyWhiteListIP_NoChangeResult()

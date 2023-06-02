@@ -14,11 +14,11 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
     [ServiceFilter(typeof(IPFilterAttribute))]
     public class ExchangeController : ControllerBase
     {
-        private readonly ILogger<AffInfoController> _logger;
+        private readonly ILogger<ExchangeController> _logger;
         private readonly IExchangeService _exchangeService;
 
         public ExchangeController(
-            ILogger<AffInfoController> logger,
+            ILogger<ExchangeController> logger,
             IExchangeService exchangeService)
         {
             _logger = logger;
