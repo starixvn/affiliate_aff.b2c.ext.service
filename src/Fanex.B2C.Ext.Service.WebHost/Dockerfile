@@ -17,12 +17,7 @@ RUN dotnet build "Fanex.B2C.Ext.Service.WebHost.csproj" -c Release -o /app/build
 
 RUN dotnet publish "Fanex.B2C.Ext.Service.WebHost.csproj" -c Release -o /app/publish
 
-FROM hub.nexdev.net/base/dotnet/core/aspnet:6.0-final
-
-RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/g' /etc/ssl/openssl.cnf
-RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /etc/ssl/openssl.cnf
-RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/g' /usr/lib/ssl/openssl.cnf
-RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.cnf
+FROM hub.nexdev.net/base/dotnet/core/aspnet:6.0-alpine
 
 ENV ASPNETCORE_URLS=http://+:5000
 EXPOSE 5000
