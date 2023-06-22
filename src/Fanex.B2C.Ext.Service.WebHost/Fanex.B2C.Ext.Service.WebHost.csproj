@@ -5,6 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <SonarQubeSetting Include="sonar.coverage.exclusions">
+      <Value>**</Value>
+    </SonarQubeSetting>
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="App_Data\SpConfig\SpName.xml">
