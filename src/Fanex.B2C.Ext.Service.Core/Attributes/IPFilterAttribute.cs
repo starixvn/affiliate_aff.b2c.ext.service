@@ -2,6 +2,7 @@
 using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NetTools;
 using System.Net;
@@ -11,12 +12,15 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class IPFilterAttribute : ActionFilterAttribute
     {
+        private readonly ILogger<IPFilterAttribute> _logger;
         private readonly ApplicationOptions _applicationOptions;
 
-        public IPFilterAttribute(IOptions<ApplicationOptions> applicationOptionAccessor)
+        public IPFilterAttribute(
+            ILogger<IPFilterAttribute> logger,
+            IOptions<ApplicationOptions> applicationOptionAccessor)
         {
+            _logger = logger;
             _applicationOptions = applicationOptionAccessor.Value;
-
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
@@ -40,14 +44,16 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
             }
         }
 
-        private static readonly Func<string, IPAddress, bool> IsInRangeIP = (ipRangeString, ipAddress) =>
+        private bool IsInRangeIP(string ipRangeString, IPAddress ipAddress)
         {
             if (!IPAddressRange.TryParse(ipRangeString, out IPAddressRange ipRange))
             {
-                throw new Exception($"The WhiteList IP: {ipRangeString} was invalid - client IP: ${ipAddress}");
+                _logger.LogError($"The WhiteList IP: {ipRangeString} was invalid - client IP: ${ipAddress}");
+
+                return false;
             }
 
             return ipRange.Contains(ipAddress);
-        };
+        }
     }
 }

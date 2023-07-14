@@ -39,10 +39,9 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
         private async Task HandleError(HttpContext context, Exception error)
         {
             context.Response.StatusCode = ServerErrorCode;
-            context.Response.ContentType = "application/json";
             var errorMsg = ErrorMessageHelper.GenerateMessage(context, error);
             _logger.LogCritical(error, errorMsg);
-            await context.Response.WriteAsync(JsonConvert.SerializeObject(new
+            await context.Response.WriteAsJsonAsync(JsonConvert.SerializeObject(new
             {
                 State = "Internal Server Error",
                 Msg = "Sorry, an error occurred while processing your request."
