@@ -57,7 +57,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
 
                 //Assert
                 await _mockNext.Received().Invoke(Arg.Any<HttpContext>());
-                Assert.Equal(context.Response.StatusCode, (int)HttpStatusCode.InternalServerError);
+                Assert.Equal((int)HttpStatusCode.InternalServerError, context.Response.StatusCode);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
 
                 //Assert
                 await _mockNext.Received().Invoke(Arg.Any<HttpContext>());
-                Assert.Equal(context.Response.StatusCode, (int)HttpStatusCode.InternalServerError);
+                Assert.Equal((int)HttpStatusCode.InternalServerError, context.Response.StatusCode);
             }
         }
     }
