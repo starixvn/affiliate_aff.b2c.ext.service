@@ -2,7 +2,7 @@ FROM hub.nexdev.net/base/dotnet/core/sdk:6.0-alpine AS builder
 
 WORKDIR "/src"
 
-RUN dotnet nuget add source http://nuget.nexdev.net/api/v2
+RUN dotnet nuget add source https://nuget.nexdev.net/api/v2
 
 COPY ["src/Fanex.B2C.Ext.Service.Core/Fanex.B2C.Ext.Service.Core.csproj", "./Fanex.B2C.Ext.Service.Core/"]
 RUN dotnet restore "Fanex.B2C.Ext.Service.Core/Fanex.B2C.Ext.Service.Core.csproj" -v n
@@ -21,6 +21,13 @@ FROM hub.nexdev.net/base/dotnet/core/aspnet:6.0-alpine
 
 ENV ASPNETCORE_URLS=http://+:5000
 EXPOSE 5000
+
+# Don’t run as root
+RUN adduser --disabled-password \
+  --home /app \
+  --gecos '' dotnetuser && chown -R dotnetuser /app && chown -R dotnetuser /tmp
+USER dotnetuser
+#
 
 WORKDIR "/app"
 
