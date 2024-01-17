@@ -54,8 +54,8 @@ namespace Fanex.B2C.Ext.Service.Core.Services
             var jwtToken = handler.CreateJwtSecurityToken(_tokenManagement.Issuer,
                   _tokenManagement.Audience,
                   new ClaimsIdentity(claim),
-                  DateTime.Now,
-                  DateTime.Now.AddMinutes(_tokenManagement.AccessExpiration),
+                  DateTimeOffset.Now.DateTime,
+                  DateTimeOffset.Now.AddMinutes(_tokenManagement.AccessExpiration).DateTime,
                   null,
                   credentials,
                   encryptCredenction

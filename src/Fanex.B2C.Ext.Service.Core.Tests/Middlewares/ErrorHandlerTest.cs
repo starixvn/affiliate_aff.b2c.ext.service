@@ -30,7 +30,6 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
 
             // Assert
             await _mockNext.Received().Invoke(Arg.Any<HttpContext>());
-            _mockLogger.DidNotReceive();
         }
 
         [Fact]

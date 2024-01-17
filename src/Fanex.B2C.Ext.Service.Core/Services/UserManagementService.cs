@@ -14,7 +14,7 @@ namespace Fanex.B2C.Ext.Service.Core.Services
         }
 
         public bool IsValidUser(string username, string password)
-            => _users.Any(x => x.UserName.Equals(username)
+            => _users.Exists(x => x.UserName.Equals(username)
             && x.Password.Equals(password.Sha256()));
     }
 }
