@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions SiteId="32" SiteName="B2C_Api">
   <Function Name="Exchange_Daily_Rate">
-    <Setting Key="Aff_API_ExchangeDailyOanda_Sel" SpName="Aff_API_ExchangeDailyOanda_Sel" DbName="DBEXT.bodb02.bodbAdminNet" />
+    <Setting Key="Aff_API_ExchangeDailyOanda_Sel" SpName="Aff_API_ExchangeDailyOanda_Sel" DbName="DBEXT.bodb02.wsv_aff" />
   </Function>
   <Function Name="N88_Affiliate_Information">
-    <Setting Key="N88_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N88.bodbAdminNet" />
-    <Setting Key="N88_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N88.bodbAdminNet" />
+    <Setting Key="N88_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N88.wsv_aff" />
+    <Setting Key="N88_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N88.wsv_aff" />
   </Function>
   <Function Name="N8B_Affiliate_Information">
-    <Setting Key="N8B_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N8B.bodbAdminNet" />
-    <Setting Key="N8B_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N8B.bodbAdminNet" />
+    <Setting Key="N8B_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N8B.wsv_aff" />
+    <Setting Key="N8B_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N8B.wsv_aff" />
   </Function>
   <Function Name="N8G_Affiliate_Information">
-    <Setting Key="N8G_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N8G.bodbAdminNet" />
-    <Setting Key="N8G_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N8G.bodbAdminNet" />
+    <Setting Key="N8G_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N8G.wsv_aff" />
+    <Setting Key="N8G_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N8G.wsv_aff" />
   </Function>
 </Functions>
