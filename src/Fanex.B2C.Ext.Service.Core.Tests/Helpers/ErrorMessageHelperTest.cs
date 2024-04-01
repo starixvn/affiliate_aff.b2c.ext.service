@@ -36,7 +36,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
         public void GenerateMessage_WhenCallWithSqlException_ReturnStringHaveSqlExceptionInfo()
         {
             //Arrange
-            var connectionString = "Data Source=127.0.0.1;Initial Catalog=testDB; integrated security=false; User Id=test; Password=test";
+            var connectionString = "Data Source=127.0.0.1;Initial Catalog=testDB; integrated security=false; trustservercertificate=true; User Id=test; Password=test";
             SqlException sqlException = null;
             using (var conn = new SqlConnection(connectionString))
             {

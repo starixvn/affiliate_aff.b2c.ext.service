@@ -13,6 +13,7 @@ using Fanex.B2C.Ext.Service.Core.Extensions;
 using Fanex.B2C.Ext.Service.Core.Attributes;
 using Sentry.AspNetCore;
 using Fanex.B2C.Ext.Service.Core.Models.DTO;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Fanex.B2C.Ext.Service.WebHost
 {
@@ -41,7 +42,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
             services.Configure<List<User>>(Configuration.GetSection("Users"));
 
-            ConfigFanexData();
+            services.AddFanexSql(Configuration);
 
             services.AddResponseCaching(options =>
             {
@@ -50,12 +51,10 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
             ConfigAuthentication(services);
 
-            services.AddAuthorization(options =>
-            {
-                options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthorizationBuilder()
+                .SetDefaultPolicy(new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
                 .RequireAuthenticatedUser()
-                .Build();
-            });
+                .Build()); ;
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -105,12 +104,6 @@ namespace Fanex.B2C.Ext.Service.WebHost
                     context => !context.Request.FromInternal(),
                     builder =>
                     {
-                        //Fix adding UseHttpsRedirection conditionally via UseWhen fails in ASP.NET Core 6. Fixed in v6.0.9
-                        if (builder.ServerFeatures is null)
-                        {
-                            builder.Properties["server.Features"] = app.ServerFeatures;
-                        }
-
                         builder.UseHttpsRedirection();
                     });
             }
@@ -119,6 +112,8 @@ namespace Fanex.B2C.Ext.Service.WebHost
             app.UseUnderMaintenance();
             app.UseStatusCodePagesWithReExecute("/Error", "?code={0}");
             app.UseJWTokenOnPage();
+
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseResponseCaching();
         }
@@ -167,20 +162,6 @@ namespace Fanex.B2C.Ext.Service.WebHost
                     }
                 };
             });
-        }
-
-        private void ConfigFanexData()
-        {
-            var listConnectionName = Configuration.GetSection("ConnectionStrings").GetChildren().Select(_ => _.Key);
-            var connectionStrings = new Dictionary<string, ConnectionConfiguration>(listConnectionName
-                .Select(connectionName => new KeyValuePair<string, ConnectionConfiguration>(connectionName,
-                    new ConnectionConfiguration(connectionName, Configuration.GetConnectionString(connectionName)))
-                ));
-            DbSettingProviderManager
-              .StartNewSession()
-              .WithSqlServer(resourcePath: "~/App_Data/SpConfig/SpName.xml")
-              .Use(connectionStrings)
-              .Run();
         }
     }
 }
