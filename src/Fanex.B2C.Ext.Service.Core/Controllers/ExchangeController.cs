@@ -6,37 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-
 namespace Fanex.B2C.Ext.Service.Core.Controllers
 {
     [Authorize]
     [ApiController]
     [ServiceFilter(typeof(IPFilterAttribute))]
-    public class ExchangeController : ControllerBase
+    public class ExchangeController(
+        ILogger<ExchangeController> logger,
+        IExchangeService exchangeService) : ControllerBase
     {
-        private readonly ILogger<ExchangeController> _logger;
-        private readonly IExchangeService _exchangeService;
-
-        public ExchangeController(
-            ILogger<ExchangeController> logger,
-            IExchangeService exchangeService)
-        {
-            _logger = logger;
-            _exchangeService = exchangeService;
-        }
-
         [HttpPost]
         [Route("api/DailyExchangeRate")]
         public ActionResult Post([FromBody] DailyExchangeRateParam param)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _logger.LogInformation("Ext B2C - Get Daily Exchange Rate");
+                logger.LogInformation("Ext B2C - Get Daily Exchange Rate");
 
                 param.ExchangeIds = WebUtility.HtmlEncode(param.ExchangeIds.Trim());
 
-                return Ok(_exchangeService.GetDailyExchangeRate(param));
-            }    
+                return Ok(exchangeService.GetDailyExchangeRate(param));
+            }
 
             return BadRequest(ModelState);
         }

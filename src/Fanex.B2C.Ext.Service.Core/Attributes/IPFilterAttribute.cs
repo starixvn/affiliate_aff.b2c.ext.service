@@ -10,18 +10,10 @@ using System.Net;
 namespace Fanex.B2C.Ext.Service.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
-    public sealed class IPFilterAttribute : ActionFilterAttribute
+    public sealed class IPFilterAttribute(
+        ILogger<IPFilterAttribute> logger,
+        IOptions<ApplicationOptions> applicationOptionAccessor) : ActionFilterAttribute
     {
-        private readonly ILogger<IPFilterAttribute> _logger;
-        private readonly ApplicationOptions _applicationOptions;
-
-        public IPFilterAttribute(
-            ILogger<IPFilterAttribute> logger,
-            IOptions<ApplicationOptions> applicationOptionAccessor)
-        {
-            _logger = logger;
-            _applicationOptions = applicationOptionAccessor.Value;
-        }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (context.HttpContext.Request.FromInternal())
@@ -30,7 +22,7 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
             }
 
             var ipAddress = context.HttpContext.Connection.RemoteIpAddress;
-            var whiteListIPList = _applicationOptions.WhiteList;
+            var whiteListIPList = applicationOptionAccessor.Value.WhiteList;
 
             var isInWhiteListIPList = !whiteListIPList.Any() || whiteListIPList.Any(_ => IsInRangeIP(_, ipAddress));
             if (!isInWhiteListIPList)
@@ -48,7 +40,7 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
         {
             if (!IPAddressRange.TryParse(ipRangeString, out IPAddressRange ipRange))
             {
-                _logger.LogError($"The WhiteList IP: {ipRangeString} was invalid - client IP: ${ipAddress}");
+                logger.LogError($"The WhiteList IP: {ipRangeString} was invalid - client IP: ${ipAddress}");
 
                 return false;
             }

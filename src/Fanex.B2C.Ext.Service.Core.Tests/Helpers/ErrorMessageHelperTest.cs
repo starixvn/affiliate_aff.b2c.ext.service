@@ -1,8 +1,8 @@
-using System.Data.SqlClient;
 using Fanex.B2C.Ext.Service.Core.Helper;
 using Fanex.Data;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
+using System.Data.SqlClient;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
 {
@@ -20,7 +20,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
         {
             //Arrange
             var exception = new Exception("test");
-            
+
             //Action
             var result = ErrorMessageHelper.GenerateMessage(_mockHttpContext, exception);
 

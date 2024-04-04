@@ -11,7 +11,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
     {
         private HttpContext _mockHttpContext { get; set; }
         private RequestDelegate _mockNext { get; set; }
-        private IMaintenanceService  _mockMaintenanceService { get; set; }
+        private IMaintenanceService _mockMaintenanceService { get; set; }
 
         public UnderMaintenanceHandlerTest()
         {
@@ -40,7 +40,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
         {
             //Arrange
             var header = Substitute.For<IHeaderDictionary>();
-            header.TryGetValue(Arg.Any<string>(), out Arg.Any<StringValues>()).Returns(x => {
+            header.TryGetValue(Arg.Any<string>(), out Arg.Any<StringValues>()).Returns(x =>
+            {
                 x[1] = new StringValues("XMLHttpRequest");
                 return true;
             });

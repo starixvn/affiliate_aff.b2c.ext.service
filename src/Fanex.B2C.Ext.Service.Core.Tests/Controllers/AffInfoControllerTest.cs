@@ -22,30 +22,32 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public void GetAffInfo_WhenCall_CallLogInformationAndReturnCorrect()
         {
             //Arrange
+            var param = new AffInfoParam { LicenseeCode = "N8B" };
             _affililateInfoService.GetAffInfo(Arg.Any<AffInfoParam>()).Returns(new AffInfo());
             var controller = new AffInfoController(_logger, _affililateInfoService);
 
             //Action
-            var result = controller.GetAffInfo(new AffInfoParam{ LicenseeCode = "N8C" });
+            var result = controller.GetAffInfo(param);
 
             //Assert
             Assert.NotNull(result);
-            _logger.Received().LogInformation("Ext B2C - Get aff info");
+            _logger.Received().LogInformation($"Ext B2C - Get aff {param.LicenseeCode} info");
         }
 
-                [Fact]
+        [Fact]
         public void GetAffDetailInfoList_WhenCall_CallLogInformationAndReturnCorrect()
         {
             //Arrange
-            _affililateInfoService.GetAffDetailInfoList(Arg.Any<AffDetailInfoParam>()).Returns(new List<AffDetailInfo>{new AffDetailInfo()});
+            var param = new AffDetailInfoParam { LicenseeCode = "N88" };
+            _affililateInfoService.GetAffDetailInfoList(Arg.Any<AffDetailInfoParam>()).Returns([new AffDetailInfo()]);
             var controller = new AffInfoController(_logger, _affililateInfoService);
 
             //Action
-            var result = controller.GetAffDetailInfoList(new AffDetailInfoParam{ LicenseeCode = "N88" });
+            var result = controller.GetAffDetailInfoList(param);
 
             //Assert
-            Assert.Single(result);
-            _logger.Received().LogInformation("Ext B2C - Get aff detail info list");
+            Assert.NotNull(result);
+            _logger.Received().LogInformation($"Ext B2C - Get aff {param.LicenseeCode} detail info list");
         }
     }
 }

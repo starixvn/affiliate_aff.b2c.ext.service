@@ -1,6 +1,6 @@
-using System.Net;
-using Microsoft.AspNetCore.Mvc;
 using Fanex.B2C.Ext.Service.Core.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 {

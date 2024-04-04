@@ -1,9 +1,9 @@
-using System.Data.Common;
 using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Models.MetaModel;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Fanex.Data;
 using NSubstitute;
+using System.Data.Common;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Services
 {
@@ -22,7 +22,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
             //Arrange
             var param = new DailyExchangeRateParam();
             var mockObjectDB = Substitute.For<IObjectDb>();
-            mockObjectDB.Query<DailyExchangeRate>(Arg.Any<object>(), Arg.Any<DbTransaction>()).Returns(new List<DailyExchangeRate>{ new DailyExchangeRate() });
+            mockObjectDB.Query<DailyExchangeRate>(Arg.Any<object>(), Arg.Any<DbTransaction>()).Returns(new List<DailyExchangeRate> { new DailyExchangeRate() });
 
             ObjectDbFactory.SwitchToTestingMode();
             ObjectDbFactory.Mock((x, y) => mockObjectDB);

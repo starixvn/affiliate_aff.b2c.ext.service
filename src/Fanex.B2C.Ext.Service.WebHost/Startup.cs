@@ -1,32 +1,24 @@
-﻿using Fanex.B2C.Ext.Service.Core.Middleware;
+﻿using Fanex.B2C.Ext.Service.Core.Attributes;
+using Fanex.B2C.Ext.Service.Core.Extensions;
+using Fanex.B2C.Ext.Service.Core.Middleware;
 using Fanex.B2C.Ext.Service.Core.Models;
-using Fanex.Data;
+using Fanex.B2C.Ext.Service.Core.Models.DTO;
+using Fanex.B2C.Ext.Service.Core.Services;
 using Fanex.Data.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Sentry.AspNetCore;
 using System.Security.Claims;
 using System.Text;
-using Fanex.B2C.Ext.Service.Core.Services;
-using Fanex.B2C.Ext.Service.Core.Extensions;
-using Fanex.B2C.Ext.Service.Core.Attributes;
-using Sentry.AspNetCore;
-using Fanex.B2C.Ext.Service.Core.Models.DTO;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Fanex.B2C.Ext.Service.WebHost
 {
-    public class Startup
+    public class Startup(IConfiguration configuration)
     {
         private const string ApplicationOptionSettingKey = "ApplicationOptions";
-
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,15 +26,40 @@ namespace Fanex.B2C.Ext.Service.WebHost
             services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                var jwtSecurityScheme = new OpenApiSecurityScheme
+                {
+                    BearerFormat = "JWT",
+                    Name = "JWT Authentication",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                    Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
 
-            services.Configure<SentryAspNetCoreOptions>(Configuration.GetSection("Sentry"));
-            services.Configure<TokenManagement>(Configuration.GetSection("tokenManagement"));
-            services.Configure<ApplicationOptions>(Configuration.GetSection(ApplicationOptionSettingKey));
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
 
-            services.Configure<List<User>>(Configuration.GetSection("Users"));
+                c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
 
-            services.AddFanexSql(Configuration);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { jwtSecurityScheme, Array.Empty<string>() }
+                });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aff.B2C.Ext.Service", Version = "v1" });
+            });
+
+            services.Configure<SentryAspNetCoreOptions>(configuration.GetSection("Sentry"));
+            services.Configure<TokenManagement>(configuration.GetSection("tokenManagement"));
+            services.Configure<ApplicationOptions>(configuration.GetSection(ApplicationOptionSettingKey));
+
+            services.Configure<List<User>>(configuration.GetSection("Users"));
+
+            services.AddFanexSql(configuration);
 
             services.AddResponseCaching(options =>
             {
@@ -54,7 +71,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
             services.AddAuthorizationBuilder()
                 .SetDefaultPolicy(new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
                 .RequireAuthenticatedUser()
-                .Build()); ;
+                .Build());
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -80,13 +97,13 @@ namespace Fanex.B2C.Ext.Service.WebHost
         {
             app.UsePingCheck();
             app.UseForwardedHeaders();
-            if (string.Equals(Configuration["UseSwagger"], "1"))
+            if (string.Equals(configuration["UseSwagger"], "1"))
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
-            if (string.Equals(Configuration["UseErrorHandler"], "1"))
+            if (string.Equals(configuration["UseErrorHandler"], "1"))
             {
                 app.UseErrorHandler();
             }
@@ -97,7 +114,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
             app.UseWhoAmICheck();
             if (!env.IsDevelopment())
-            {    
+            {
                 app.UseHsts();
 
                 app.UseWhen(
@@ -125,13 +142,14 @@ namespace Fanex.B2C.Ext.Service.WebHost
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
             services.AddScoped<IPFilterAttribute>();
+            services.AddScoped<LicenseeFilterAttribute>();
 
-            services.AddUnderMaintenance(Configuration);
+            services.AddUnderMaintenance(configuration);
         }
 
         private void ConfigAuthentication(IServiceCollection services)
         {
-            var token = Configuration.GetSection("tokenManagement").Get<TokenManagement>();
+            var token = configuration.GetSection("tokenManagement").Get<TokenManagement>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(x =>
             {

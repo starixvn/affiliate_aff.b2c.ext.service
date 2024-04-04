@@ -110,12 +110,12 @@
             var request = context.Request;
 
             return new Dictionary<string, object>
-                    {
-                        [nameof(request.Host)] = request.Host,
-                        [nameof(request.Path)] = request.Path,
-                        [nameof(request.Body)] = request.Body,
-                        ["Remote IP"] = context.Connection.RemoteIpAddress
-                    };
+            {
+                [nameof(request.Host)] = request.Host,
+                [nameof(request.Path)] = request.Path,
+                [nameof(request.Body)] = request.Body,
+                ["Remote IP"] = context.Connection.RemoteIpAddress
+            };
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
             result.Add("Local Ip", context.Connection.LocalIpAddress.ToString());
             result.Add("Local Port", context.Connection.LocalPort);
             result.Add("Client Ip", context.Connection.RemoteIpAddress.ToString());
-            result.Add("Server Time", DateTimeOffset.Now.ToString(CultureInfo.InvariantCulture));
+            result.Add("Server Time", DateTimeOffset.Now.UtcDateTime.ToString(CultureInfo.InvariantCulture));
             result.Add("Last Upadted", File.GetCreationTime(typeof(WhoAmIHealthCheck).Assembly.Location).ToString(CultureInfo.InvariantCulture));
             result.Add("Host", context.Request.Host);
             result.Add("Schema", context.Request.Scheme);
