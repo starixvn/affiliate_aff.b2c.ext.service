@@ -5,6 +5,6 @@ namespace Fanex.B2C.Ext.Service.Core.Services
 {
     public interface IExchangeService
     {
-        IEnumerable<DailyExchangeRate> GetDailyExchangeRate(DailyExchangeRateParam param);
+        Task<IEnumerable<DailyExchangeRate>> GetDailyExchangeRateAsync(DailyExchangeRateCriteria criteria);
     }
 }

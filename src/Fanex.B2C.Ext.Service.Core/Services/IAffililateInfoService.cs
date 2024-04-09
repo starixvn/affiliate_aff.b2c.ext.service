@@ -5,7 +5,7 @@ namespace Fanex.B2C.Ext.Service.Core.Services
 {
     public interface IAffililateInfoService
     {
-        public AffInfo GetAffInfo(AffInfoParam param);
-        public IEnumerable<AffDetailInfo> GetAffDetailInfoList(AffDetailInfoParam param);
+        public Task<AffInfo> GetAffInfoAsync(AffInfoCriteria criteria);
+        public Task<IEnumerable<AffDetailInfo>> GetAffDetailInfoListAsync(AffDetailInfoCriteria criteria);
     }
 }

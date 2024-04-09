@@ -1,30 +1,14 @@
 ﻿using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Models.MetaModel;
 using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace Fanex.B2C.Ext.Service.Core.Services
 {
-    public class AffililateInfoService : IAffililateInfoService
+    public class AffililateInfoService(IDynamicRepository repository) : IAffililateInfoService
     {
-        public AffInfo GetAffInfo(AffInfoParam param)
-        {
-            var spName = $"{param.LicenseeCode}_Aff_API_AffiliateInfo_Sel";
+        public async Task<AffInfo> GetAffInfoAsync(AffInfoCriteria criteria) => await repository.GetAsync<AffInfo>(criteria).ConfigureAwait(false);
 
-            using var db = ObjectDbFactory.CreateInstance(spName);
-            db.SetParameterValue("@MonthDate", param.MonthDate);
-            db.SetParameterValue("@Player_Username", param.PlayerName);
-            db.SetParameterValue("@BaseCurrencyName", param.BaseCurrencyName);
-
-            return db.QueryEntity<AffInfo>();
-        }
-
-        public IEnumerable<AffDetailInfo> GetAffDetailInfoList(AffDetailInfoParam param)
-        {
-            var spName = $"{param.LicenseeCode}_Aff_API_AffiliateDetailInfo_Sel";
-
-            using var db = ObjectDbFactory.CreateInstance(spName);
-
-            return db.Query<AffDetailInfo>(param);
-        }
+        public async Task<IEnumerable<AffDetailInfo>> GetAffDetailInfoListAsync(AffDetailInfoCriteria criteria) => await repository.FetchAsync<AffDetailInfo>(criteria).ConfigureAwait(false);
     }
 }

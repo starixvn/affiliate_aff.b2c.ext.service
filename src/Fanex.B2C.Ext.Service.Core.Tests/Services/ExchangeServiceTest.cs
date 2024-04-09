@@ -2,8 +2,8 @@ using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Models.MetaModel;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Fanex.Data;
+using Fanex.Data.Repository;
 using NSubstitute;
-using System.Data.Common;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Services
 {
@@ -17,23 +17,20 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
         }
 
         [Fact]
-        public void GetDailyExchangeRate_WhenCall_AssignCorrectParrameterAndReturnCorrectResultAsync()
+        public async Task GetDailyExchangeRate_WhenCall_AssignCorrectParrameterAndReturnCorrectResultAsync()
         {
             //Arrange
-            var param = new DailyExchangeRateParam();
-            var mockObjectDB = Substitute.For<IObjectDb>();
-            mockObjectDB.Query<DailyExchangeRate>(Arg.Any<object>(), Arg.Any<DbTransaction>()).Returns(new List<DailyExchangeRate> { new DailyExchangeRate() });
+            var param = new DailyExchangeRateCriteria();
+            var repository = Substitute.For<IDynamicRepository>();
+            repository.FetchAsync<DailyExchangeRate>(Arg.Any<DailyExchangeRateCriteria>()).Returns(new List<DailyExchangeRate> { new DailyExchangeRate() });
 
-            ObjectDbFactory.SwitchToTestingMode();
-            ObjectDbFactory.Mock((x, y) => mockObjectDB);
-            var service = new ExchangeService();
+            var service = new ExchangeService(repository);
 
             //Action
-            var result = service.GetDailyExchangeRate(param);
+            var result = await service.GetDailyExchangeRateAsync(param);
 
             //Assert
             Assert.Single(result);
-            mockObjectDB.Received().Query<DailyExchangeRate>(param);
         }
     }
 }

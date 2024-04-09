@@ -4,6 +4,7 @@ using Fanex.B2C.Ext.Service.Core.Middleware;
 using Fanex.B2C.Ext.Service.Core.Models;
 using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Services;
+using Fanex.Data.Repository;
 using Fanex.Data.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -137,6 +138,8 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
         private void DIRegister(IServiceCollection services)
         {
+            services.AddSingleton<IDynamicRepository, DynamicRepository>();
+
             services.AddScoped<IExchangeService, ExchangeService>();
             services.AddScoped<IAffililateInfoService, AffililateInfoService>();
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();

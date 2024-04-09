@@ -17,7 +17,7 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
     {
         [HttpPost]
         [Route("api/DailyExchangeRate")]
-        public ActionResult Post([FromBody] DailyExchangeRateParam param)
+        public async Task<IActionResult> Post([FromBody] DailyExchangeRateCriteria param)
         {
             if (ModelState.IsValid)
             {
@@ -25,7 +25,7 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
 
                 param.ExchangeIds = WebUtility.HtmlEncode(param.ExchangeIds.Trim());
 
-                return Ok(exchangeService.GetDailyExchangeRate(param));
+                return Ok(await exchangeService.GetDailyExchangeRateAsync(param));
             }
 
             return BadRequest(ModelState);

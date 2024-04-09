@@ -17,25 +17,25 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
     {
         [HttpPost]
         [Route("api/AffInfo")]
-        public ActionResult GetAffInfo([FromBody] AffInfoParam param)
+        public async Task<IActionResult> GetAffInfoAsync([FromBody] AffInfoCriteria criteria)
         {
             if (ModelState.IsValid)
             {
-                logger.LogInformation($"Ext B2C - Get aff {param.LicenseeCode} info");
+                logger.LogInformation($"Ext B2C - Get aff {criteria.LicenseeCode} info");
 
-                return Ok(affililateInfoService.GetAffInfo(param));
+                return Ok(await affililateInfoService.GetAffInfoAsync(criteria));
             }
 
-            return BadRequest($"{ModelState} ");
+            return BadRequest($"{ModelState}");
         }
 
         [HttpPost]
         [Route("api/AffDetailInfoList")]
-        public ActionResult GetAffDetailInfoList([FromBody] AffDetailInfoParam param)
+        public async Task<IActionResult> GetAffDetailInfoListAsync([FromBody] AffDetailInfoCriteria criteria)
         {
-            logger.LogInformation($"Ext B2C - Get aff {param.LicenseeCode} detail info list");
+            logger.LogInformation($"Ext B2C - Get aff {criteria.LicenseeCode} detail info list");
 
-            return Ok(affililateInfoService.GetAffDetailInfoList(param));
+            return Ok(await affililateInfoService.GetAffDetailInfoListAsync(criteria));
         }
     }
 }

@@ -21,14 +21,14 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         }
 
         [Fact]
-        public void Post_WhenCallWith__InvalidModel_ReturnBadRequest()
+        public async Task Post_WhenCallWith__InvalidModel_ReturnBadRequest()
         {
             //Arrange
             var controller = new ExchangeController(_logger, _exchangeService);
             controller.ModelState.AddModelError("Error1", "Invalid");
 
             //Action
-            var result = controller.Post(new DailyExchangeRateParam()) as ObjectResult;
+            var result = await controller.Post(new DailyExchangeRateCriteria()) as ObjectResult;
 
             //Assert
             Assert.Equal((int)HttpStatusCode.BadRequest, result?.StatusCode);
@@ -37,11 +37,10 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         [Theory]
         [InlineData("USD")]
         [InlineData("USD ")]
-        public void Post_WhenCall_CallLogInformationAndReturnCorrect(string exchangeIds)
+        public async Task Post_WhenCall_CallLogInformationAndReturnCorrect(string exchangeIds)
         {
             //Arrange
-            var expectedParam = new DailyExchangeRateParam { ExchangeIds = "USD", ExchangeDate = new DateTime(2023, 05, 30) };
-            _exchangeService.GetDailyExchangeRate(Arg.Any<DailyExchangeRateParam>()).Returns(new List<DailyExchangeRate>{new DailyExchangeRate {
+            _exchangeService.GetDailyExchangeRateAsync(Arg.Any<DailyExchangeRateCriteria>()).Returns(new List<DailyExchangeRate>{new DailyExchangeRate {
                 ExchangeId = 123,
                 Code = "USD",
                 Currency = "USD",
@@ -50,7 +49,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
             var controller = new ExchangeController(_logger, _exchangeService);
 
             //Action
-            var result = controller.Post(new DailyExchangeRateParam { ExchangeIds = exchangeIds }) as ObjectResult;
+            var result = await controller.Post(new DailyExchangeRateCriteria { ExchangeIds = exchangeIds }) as ObjectResult;
 
             //Assert
             _logger.Received().LogInformation("Ext B2C - Get Daily Exchange Rate");
