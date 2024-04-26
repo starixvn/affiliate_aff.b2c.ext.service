@@ -2,27 +2,43 @@
   "Users": [
     {
       "username": "B2C_API",
-      "password": "7AmOjLpYsf6AuJvzGHQxBh84TCpd8Jt6qXEYul7PL4I="
+      "password": "7AmOjLpYsf6AuJvzGHQxBh84TCpd8Jt6qXEYul7PL4I=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ]
     },
     {
       "username": "B2C_EXT",
-      "password": "TXLG3+PB6FyM/jClnPpmKg/92Gf41TZFzYv4eiM8GDY="
+      "password": "TXLG3+PB6FyM/jClnPpmKg/92Gf41TZFzYv4eiM8GDY=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ]
     },
     {
       "username": "B2C_SERVICE",
-      "password": "54ftCR156UG1GNofZDyNd1n40vrzj8sD/eCcnMGYtdo="
+      "password": "54ftCR156UG1GNofZDyNd1n40vrzj8sD/eCcnMGYtdo=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ]
     },
     {
       "username": "N88_API",
-      "password": "Sok9SsyE5Qzkf0H5dTuOLkj1/XPO/vcGlPqBtYgmj9A="
+      "password": "Sok9SsyE5Qzkf0H5dTuOLkj1/XPO/vcGlPqBtYgmj9A=",
+      "SupportedLicensees": [ "N88" ]
     },
     {
       "username": "N8B_API",
-      "password": "/55MyPAjGpaRU49HpFyxkIaUnzUiX6XCVG5c66qMI28="
+      "password": "/55MyPAjGpaRU49HpFyxkIaUnzUiX6XCVG5c66qMI28=",
+      "SupportedLicensees": [ "N8B" ]
     },
     {
       "username": "N8G_API",
-      "password": "0f0vE2UOHKSTfuYga5CsECF66GHHw3UaahupSag9Y2c="
+      "password": "0f0vE2UOHKSTfuYga5CsECF66GHHw3UaahupSag9Y2c=",
+      "SupportedLicensees": [ "N8G" ]
+    },
+    {
+      "username": "N8Y_API",
+      "password": "XKZ09YrqbsTOEwgevG2RmzGvMkxCkYy1Az35aAAHcWc=",
+      "SupportedLicensees": [ "N8Y" ]
+    },
+    {
+      "username": "YashBet_API",
+      "password": "DTGmCb8rFxefnKdhFWjHGXWZH9vm5EE0l2c8xZ26kkg=",
+      "SupportedLicensees": [ "N8Y" ]
     }
   ]
 }

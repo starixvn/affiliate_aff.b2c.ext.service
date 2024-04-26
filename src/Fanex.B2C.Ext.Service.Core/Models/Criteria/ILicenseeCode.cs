@@ -1,6 +1,4 @@
-﻿using Fanex.Data;
-
-namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
+﻿namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
 {
     public interface ILicenseeCode
     {

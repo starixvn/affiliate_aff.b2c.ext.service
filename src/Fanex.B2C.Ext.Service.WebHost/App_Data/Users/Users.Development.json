@@ -1,28 +1,44 @@
 {
   "Users": [
     {
-      "username": "B2C_API",
-      "password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=" //1234ext
+      "Username": "B2C_API",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=", //1234ext
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ]
     },
     {
-      "username": "B2C_EXT",
-      "password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94="
+      "Username": "B2C_EXT",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ]
     },
     {
-      "username": "B2C_SERVICE",
-      "password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94="
+      "Username": "B2C_SERVICE",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ]
     },
     {
-      "username": "N88_API",
-      "password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94="
+      "Username": "N88_API",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "N88" ]
     },
     {
-      "username": "N8B_API",
-      "password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94="
+      "Username": "N8B_API",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "N8B" ]
     },
     {
-      "username": "N8G_API",
-      "password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94="
+      "Username": "N8G_API",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "N8G" ]
+    },
+    {
+      "Username": "N8Y_API",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "N8Y" ]
+    },
+    {
+      "Username": "YashBet_API",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "N8Y" ]
     }
   ]
 }
