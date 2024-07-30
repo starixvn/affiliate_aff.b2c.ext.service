@@ -1,28 +1,37 @@
+ARG CI_REGISTRY_IMAGE
+
+FROM $CI_REGISTRY_IMAGE:builder AS deps
+
+RUN mkdir -p /src/packages
+
 FROM hub.nexdev.net/base/dotnet/core/sdk:8.0-alpine AS builder
+
+ENV NUGET_PACKAGES=/src/packages
+
+COPY --from=deps $NUGET_PACKAGES/. $NUGET_PACKAGES/
 
 WORKDIR "/src"
 
 RUN dotnet nuget add source https://nuget.nexdev.net/api/v2
 
 COPY ["src/Fanex.B2C.Ext.Service.Core/Fanex.B2C.Ext.Service.Core.csproj", "./Fanex.B2C.Ext.Service.Core/"]
-RUN dotnet restore "Fanex.B2C.Ext.Service.Core/Fanex.B2C.Ext.Service.Core.csproj" -v n
+RUN dotnet restore -v n -r linux-x64 ./Fanex.B2C.Ext.Service.Core/Fanex.B2C.Ext.Service.Core.csproj
 
 COPY ["src/Fanex.B2C.Ext.Service.WebHost/Fanex.B2C.Ext.Service.WebHost.csproj", "./Fanex.B2C.Ext.Service.WebHost/"]
-RUN dotnet restore "Fanex.B2C.Ext.Service.WebHost/Fanex.B2C.Ext.Service.WebHost.csproj" -v n
+RUN dotnet restore -v n -r linux-x64 ./Fanex.B2C.Ext.Service.WebHost/Fanex.B2C.Ext.Service.WebHost.csproj
 
 COPY "/src" .
 
 WORKDIR "/src/Fanex.B2C.Ext.Service.WebHost"
-RUN dotnet build "Fanex.B2C.Ext.Service.WebHost.csproj" -c Release -o /app/build
 
-RUN dotnet publish "Fanex.B2C.Ext.Service.WebHost.csproj" -c Release -o /app/publish
+RUN dotnet publish -r linux-x64 --self-contained false -o /app/publish
 
 FROM hub.nexdev.net/base/dotnet/core/aspnet:8.0-alpine
 
 ENV ASPNETCORE_URLS=http://+:5000
 EXPOSE 5000
 
-# Don’t run as root
+# Don't run as root
 RUN adduser --disabled-password \
   --home /app \
   --gecos '' dotnetuser && chown -R dotnetuser /app && chown -R dotnetuser /tmp
