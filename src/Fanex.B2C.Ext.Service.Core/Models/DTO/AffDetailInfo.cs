@@ -28,5 +28,20 @@ namespace Fanex.B2C.Ext.Service.Core.Models.DTO
 
         [JsonPropertyName("LastLoginIP")]
         public string LastLoginIP { get; set; }
+
+        [JsonPropertyName("FirstName")]
+        public string FirstName { get; set; }
+
+        [JsonPropertyName("LastName")]
+        public string LastName { get; set; }
+
+        [JsonPropertyName("ContactNumber")]
+        public string Phone { get; set; }
+
+        [JsonPropertyName("Status")]
+        public string Status { get; set; }
+
+        [JsonPropertyName("Email")]
+        public string Email { get; set; }
     }
 }
