@@ -1,9 +1,9 @@
-using System.Net;
 using Fanex.B2C.Ext.Service.Core.Controllers;
 using Fanex.B2C.Ext.Service.Core.Models;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
+using System.Net;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 {

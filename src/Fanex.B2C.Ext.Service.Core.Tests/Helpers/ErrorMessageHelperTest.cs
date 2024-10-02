@@ -1,8 +1,8 @@
-using System.Data.SqlClient;
 using Fanex.B2C.Ext.Service.Core.Helper;
 using Fanex.Data;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
+using System.Data.SqlClient;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
 {
@@ -20,7 +20,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
         {
             //Arrange
             var exception = new Exception("test");
-            
+
             //Action
             var result = ErrorMessageHelper.GenerateMessage(_mockHttpContext, exception);
 
@@ -36,7 +36,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
         public void GenerateMessage_WhenCallWithSqlException_ReturnStringHaveSqlExceptionInfo()
         {
             //Arrange
-            var connectionString = "Data Source=127.0.0.1;Initial Catalog=testDB; integrated security=false; User Id=test; Password=test";
+            var connectionString = "Data Source=127.0.0.1;Initial Catalog=testDB; integrated security=false; trustservercertificate=true; User Id=test; Password=test";
             SqlException sqlException = null;
             using (var conn = new SqlConnection(connectionString))
             {

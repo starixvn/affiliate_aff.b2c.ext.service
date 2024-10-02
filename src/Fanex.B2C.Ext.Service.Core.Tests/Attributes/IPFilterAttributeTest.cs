@@ -1,4 +1,3 @@
-using System.Net;
 using Fanex.B2C.Ext.Service.Core.Attributes;
 using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +9,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSubstitute;
+using System.Net;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Attributes
 {

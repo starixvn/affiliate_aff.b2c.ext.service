@@ -26,7 +26,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
             //Arrange
             _mockHeader.ContainsKey("Authorization").Returns(false);
 
-            _mockQueryCollection.TryGetValue(Arg.Any<string>(), out Arg.Any<StringValues>()).Returns(x => {
+            _mockQueryCollection.TryGetValue(Arg.Any<string>(), out Arg.Any<StringValues>()).Returns(x =>
+            {
                 x[1] = new StringValues(Token);
                 return true;
             });

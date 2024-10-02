@@ -1,8 +1,8 @@
 ﻿using Fanex.B2C.Ext.Service.Core.Constant;
 using Fanex.B2C.Ext.Service.Core.Models;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
@@ -40,29 +40,34 @@ namespace Fanex.B2C.Ext.Service.Core.Services
                 return Tuple.Create<bool, Token>(false, token);
             }
 
-            var claim = new[]
+            var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, siteName),
-                new Claim(CustomClaimType.IsShowIPVN, request.IsShowIpvn.ToString(), ClaimValueTypes.Boolean)
+                new (ClaimTypes.Name, realUserName),
+                new (CustomClaimType.Site, siteName),
+                new (CustomClaimType.IsShowIPVN, request.IsShowIpvn.ToString(), ClaimValueTypes.Boolean)
              };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenManagement.Secret));
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var encryptCredenction = new EncryptingCredentials(key, JwtConstants.DirectKeyUseAlg,
-                SecurityAlgorithms.Aes256CbcHmacSha512);
-            var handler = new JwtSecurityTokenHandler();
 
-            var jwtToken = handler.CreateJwtSecurityToken(_tokenManagement.Issuer,
-                  _tokenManagement.Audience,
-                  new ClaimsIdentity(claim),
-                  DateTime.Now,
-                  DateTime.Now.AddMinutes(_tokenManagement.AccessExpiration),
-                  null,
-                  credentials,
-                  encryptCredenction
-                  );
-            token.AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_tokenManagement.Secret));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var encryptCredentials = new EncryptingCredentials(key, JwtConstants.DirectKeyUseAlg,
+                SecurityAlgorithms.Aes256CbcHmacSha512);
+            var handler = new JsonWebTokenHandler();
+            var utcDateTimeNow = DateTimeOffset.Now.UtcDateTime;
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Issuer = _tokenManagement.Issuer,
+                Audience = _tokenManagement.Audience,
+                Subject = new ClaimsIdentity(claims),
+                IssuedAt = utcDateTimeNow,
+                NotBefore = utcDateTimeNow,
+                Expires = utcDateTimeNow.AddMinutes(_tokenManagement.AccessExpiration),
+                SigningCredentials = credentials,
+                EncryptingCredentials = encryptCredentials
+            };
+
+            token.AccessToken = handler.CreateToken(tokenDescriptor);
             token.TokenType = handler.TokenType.Name;
-            return Tuple.Create<bool, Token>(true, token);
+            return Tuple.Create(true, token);
         }
     }
 }

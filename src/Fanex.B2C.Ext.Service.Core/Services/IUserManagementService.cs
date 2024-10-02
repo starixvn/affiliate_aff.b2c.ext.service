@@ -1,4 +1,5 @@
-﻿namespace Fanex.B2C.Ext.Service.Core.Services
+﻿
+namespace Fanex.B2C.Ext.Service.Core.Services
 {
     public interface IUserManagementService
     {

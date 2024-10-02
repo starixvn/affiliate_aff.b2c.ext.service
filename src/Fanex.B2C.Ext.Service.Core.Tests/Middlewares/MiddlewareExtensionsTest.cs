@@ -25,7 +25,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
         {
             //Arrange
             var ex = Record.Exception(() => MiddlewareExtensions.UsePingCheck(_mockApplicationBuilder));
-            
+
             //Assert
             Assert.Null(ex);
         }
@@ -35,7 +35,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
         {
             //Arrange
             var ex = Record.Exception(() => MiddlewareExtensions.UseJWTokenOnPage(_mockApplicationBuilder));
-            
+
             //Assert
             Assert.Null(ex);
         }
@@ -45,7 +45,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
         {
             //Arrange
             var ex = Record.Exception(() => MiddlewareExtensions.UseErrorHandler(_mockApplicationBuilder));
-            
+
             //Assert
             Assert.Null(ex);
         }
@@ -57,7 +57,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
         {
             //Arrange
             var ex = Record.Exception(() => MiddlewareExtensions.UseStaticResource(_mockApplicationBuilder, isDev));
-            
+
             //Assert
             Assert.Null(ex);
         }
@@ -67,7 +67,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
         {
             //Arrange
             var ex = Record.Exception(() => MiddlewareExtensions.AddUnderMaintenance(_mockServiceCollection, _mockConfiguration));
-            
+
             //Assert
             Assert.Null(ex);
         }
@@ -77,7 +77,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
         {
             //Arrange
             var ex = Record.Exception(() => MiddlewareExtensions.UseUnderMaintenance(_mockApplicationBuilder));
-            
+
             //Assert
             Assert.Null(ex);
         }

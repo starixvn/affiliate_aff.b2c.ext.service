@@ -1,10 +1,10 @@
-using System.Net;
 using Fanex.B2C.Ext.Service.Core.Middleware;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
+using System.Net;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
 {
@@ -30,7 +30,6 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
 
             // Assert
             await _mockNext.Received().Invoke(Arg.Any<HttpContext>());
-            _mockLogger.DidNotReceive();
         }
 
         [Fact]
@@ -49,7 +48,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
                 reponse.Headers.ReturnsForAnyArgs(new HeaderDictionary());
                 reponse.Body = stream;
 
-                features[typeof(IExceptionHandlerFeature)].ReturnsForAnyArgs(new ExceptionHandlerFeature{ Error = new Exception("Test") });
+                features[typeof(IExceptionHandlerFeature)].ReturnsForAnyArgs(new ExceptionHandlerFeature { Error = new Exception("Test") });
                 var errorHandler = new ErrorHandler(_mockNext, _mockLogger);
 
                 //Action

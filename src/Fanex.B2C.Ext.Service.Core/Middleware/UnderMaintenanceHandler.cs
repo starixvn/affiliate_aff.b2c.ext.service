@@ -3,8 +3,6 @@ using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using ONEbook.UM.Services;
 using System.Net;
-using System.Text;
-using System.Text.Json;
 
 namespace Fanex.B2C.Ext.Service.Core.Middleware
 {

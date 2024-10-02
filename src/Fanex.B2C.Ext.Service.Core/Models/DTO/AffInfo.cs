@@ -2,7 +2,6 @@
 
 namespace Fanex.B2C.Ext.Service.Core.Models.DTO
 {
-    [Serializable]
     public class AffInfo
     {
         private const int OneHundred = 100;

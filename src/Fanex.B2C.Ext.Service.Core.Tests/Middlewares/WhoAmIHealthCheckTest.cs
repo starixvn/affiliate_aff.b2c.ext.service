@@ -1,9 +1,9 @@
-using System.Net;
 using Fanex.B2C.Ext.Service.Core.Middleware;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using NSubstitute;
+using System.Net;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
 {
