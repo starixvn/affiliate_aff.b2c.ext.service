@@ -44,6 +44,8 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
             var context = httpContextAccessor.HttpContext;
             result.Add("Local Ip", context.Connection.LocalIpAddress.ToString());
             result.Add("Local Port", context.Connection.LocalPort);
+            result.Add("Remote Ip", context.Connection.RemoteIpAddress.ToString());
+            result.Add("Remote Port", context.Connection.RemotePort);
             result.Add("Client Ip", context.Request.GetForwardedIP());
             result.Add("Server Time", DateTimeOffset.Now.UtcDateTime.ToString(CultureInfo.InvariantCulture));
             result.Add("Last Upadted", File.GetCreationTime(typeof(WhoAmIHealthCheck).Assembly.Location).ToString(CultureInfo.InvariantCulture));
