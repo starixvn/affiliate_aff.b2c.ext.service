@@ -79,7 +79,6 @@ namespace Fanex.B2C.Ext.Service.WebHost
                 options.ForwardedHeaders = ForwardedHeaders.All;
                 options.KnownNetworks.Clear();
                 options.KnownProxies.Clear();
-                options.ForwardLimit = null;
             });
 
             services.AddHealthChecks()

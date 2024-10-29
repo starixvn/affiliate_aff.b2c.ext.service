@@ -21,7 +21,7 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
                 return;
             }
 
-            var ipAddress = context.HttpContext.Request.GetForwardedIP();
+            var ipAddress = context.HttpContext.Request.GetClientIP();
             var whiteListIPList = applicationOptionAccessor.Value.WhiteList;
 
             var isInWhiteListIPList = !whiteListIPList.Any() || whiteListIPList.Any(_ => IsInRangeIP(_, ipAddress));

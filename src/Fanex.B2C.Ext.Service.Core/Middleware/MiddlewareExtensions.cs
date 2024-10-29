@@ -113,7 +113,7 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
                 => cache.Set(BuildKey(key), value, ByPassUMCacheTime);
 
             private string BuildKey(string key)
-                => $"{key}:{httpContextAccessor.HttpContext?.Request.GetForwardedIP()}";
+                => $"{key}:{httpContextAccessor.HttpContext?.Request.GetClientIP()}";
         }
     }
 }

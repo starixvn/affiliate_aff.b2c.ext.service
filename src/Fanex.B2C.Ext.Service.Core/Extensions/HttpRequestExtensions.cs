@@ -11,16 +11,21 @@ namespace Fanex.B2C.Ext.Service.Core.Extensions
         public static bool FromInternal(this HttpRequest request)
             => HostName.Contains(request.Host.Host, StringComparison.OrdinalIgnoreCase);
 
-        public static string GetForwardedIP(this HttpRequest request)
+        public static string GetClientIP(this HttpRequest request)
         {
-            string forwardedIP = null;
+            string clientIP = null;
 
-            if (request.Headers.TryGetValue(HeaderKey.X_FORWARDED_FOR, out var value))
+            if (request.Headers.TryGetValue(HeaderKey.X_ACTUAL_IP, out var actualIP))
             {
-                forwardedIP = value[0];
+                clientIP = actualIP[0];
             }
 
-            return forwardedIP ?? request.HttpContext.Connection.RemoteIpAddress.ToString();
+            if (string.IsNullOrWhiteSpace(clientIP) && request.Headers.TryGetValue(HeaderKey.X_FORWARDED_FOR, out var forwardedIP))
+            {
+                clientIP = forwardedIP[0];
+            }
+
+            return clientIP?.Trim() ?? request.HttpContext.Connection.RemoteIpAddress.ToString();
         }
     }
 }

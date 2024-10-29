@@ -116,7 +116,7 @@
                 [nameof(request.Path)] = request.Path,
                 [nameof(request.Body)] = request.Body,
                 ["Remote IP"] = context.Connection.RemoteIpAddress,
-                ["Client IP"] = context.Request.GetForwardedIP(),
+                ["Client IP"] = context.Request.GetClientIP(),
             };
         }
     }
