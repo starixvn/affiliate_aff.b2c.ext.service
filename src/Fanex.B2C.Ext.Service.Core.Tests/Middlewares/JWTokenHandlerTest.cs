@@ -39,10 +39,10 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
             var handler = new JWTokenHandler(next: async (context) => { await Task.CompletedTask; });
 
             //Arrange
-            await handler.Invoke(_mockContext).ConfigureAwait(false);
+            await handler.Invoke(_mockContext);
 
             //Assert
-            _mockRequest.Headers.Received().Add("Authorization", "Bearer " + Token);
+            _mockRequest.Headers.Received().Append("Authorization", "Bearer " + Token);
         }
 
 
@@ -53,7 +53,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
             var mockHeader = Substitute.For<IHeaderDictionary>();
 
             mockHeader.ContainsKey("Authorization").Returns(true);
-            mockHeader["Authorization"].Returns(StringValues.Empty);
+            mockHeader.Authorization.Returns(StringValues.Empty);
             _mockRequest.Headers.Returns(mockHeader);
             _mockRequest.Query.Returns(_mockQueryCollection);
 
@@ -61,10 +61,10 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
             var handler = new JWTokenHandler(next: async (context) => { await Task.CompletedTask; });
 
             //Arrange
-            await handler.Invoke(_mockContext).ConfigureAwait(false);
+            await handler.Invoke(_mockContext);
 
             //Assert
-            _mockRequest.Headers.DidNotReceive().Add("Authorization", "Bearer " + Token);
+            _mockRequest.Headers.DidNotReceive().Append("Authorization", "Bearer " + Token);
         }
 
         [Fact]
@@ -82,10 +82,10 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
             var handler = new JWTokenHandler(next: async (context) => { await Task.CompletedTask; });
 
             //Arrange
-            await handler.Invoke(_mockContext).ConfigureAwait(false);
+            await handler.Invoke(_mockContext);
 
             //Assert
-            _mockRequest.Headers.DidNotReceive().Add("Authorization", "Bearer " + Token);
+            _mockRequest.Headers.DidNotReceive().Append("Authorization", "Bearer " + Token);
         }
     }
 }

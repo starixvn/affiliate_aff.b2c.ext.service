@@ -1,5 +1,6 @@
 ﻿namespace Fanex.B2C.Ext.Service.Core.Helper
 {
+    using Fanex.B2C.Ext.Service.Core.Extensions;
     using Fanex.Data;
     using Microsoft.AspNetCore.Http;
     using System;
@@ -114,7 +115,8 @@
                 [nameof(request.Host)] = request.Host,
                 [nameof(request.Path)] = request.Path,
                 [nameof(request.Body)] = request.Body,
-                ["Remote IP"] = context.Connection.RemoteIpAddress
+                ["Remote IP"] = context.Connection.RemoteIpAddress,
+                ["Client IP"] = context.Request.GetClientIP(),
             };
         }
     }

@@ -21,7 +21,7 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
                 return;
             }
 
-            var ipAddress = context.HttpContext.Connection.RemoteIpAddress;
+            var ipAddress = context.HttpContext.Request.GetClientIP();
             var whiteListIPList = applicationOptionAccessor.Value.WhiteList;
 
             var isInWhiteListIPList = !whiteListIPList.Any() || whiteListIPList.Any(_ => IsInRangeIP(_, ipAddress));
@@ -36,7 +36,7 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
             }
         }
 
-        private bool IsInRangeIP(string ipRangeString, IPAddress ipAddress)
+        private bool IsInRangeIP(string ipRangeString, string ipAddress)
         {
             if (!IPAddressRange.TryParse(ipRangeString, out IPAddressRange ipRange))
             {
@@ -45,7 +45,7 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
                 return false;
             }
 
-            return ipRange.Contains(ipAddress);
+            return ipRange.Contains(IPAddress.Parse(ipAddress));
         }
     }
 }

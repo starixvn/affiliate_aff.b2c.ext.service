@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Fanex.B2C.Ext.Service.Core.Constant;
+using Fanex.B2C.Ext.Service.Core.Extensions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Collections.ObjectModel;
@@ -8,22 +10,13 @@ using System.Net.Sockets;
 
 namespace Fanex.B2C.Ext.Service.Core.Middleware
 {
-    public class WhoAmIHealthCheck : IHealthCheck
+    public class WhoAmIHealthCheck(IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env) : IHealthCheck
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IWebHostEnvironment _env;
-
-        public WhoAmIHealthCheck(IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env)
-        {
-            _httpContextAccessor = httpContextAccessor;
-            _env = env;
-        }
-
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             IDictionary<string, object> result = new Dictionary<string, object>
             {
-                { "Env", _env.EnvironmentName }
+                { "Env", env.EnvironmentName }
             };
             await AddServerIPInfo(result);
             AddExtraServerInfo(result);
@@ -48,14 +41,25 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
 
         private void AddExtraServerInfo(IDictionary<string, object> result)
         {
-            var context = _httpContextAccessor.HttpContext;
+            var context = httpContextAccessor.HttpContext;
             result.Add("Local Ip", context.Connection.LocalIpAddress.ToString());
             result.Add("Local Port", context.Connection.LocalPort);
-            result.Add("Client Ip", context.Connection.RemoteIpAddress.ToString());
+            result.Add("Remote Ip", context.Connection.RemoteIpAddress.ToString());
+            result.Add("Remote Port", context.Connection.RemotePort);
+            result.Add("Client Ip", context.Request.GetClientIP());
             result.Add("Server Time", DateTimeOffset.Now.UtcDateTime.ToString(CultureInfo.InvariantCulture));
             result.Add("Last Upadted", File.GetCreationTime(typeof(WhoAmIHealthCheck).Assembly.Location).ToString(CultureInfo.InvariantCulture));
             result.Add("Host", context.Request.Host);
             result.Add("Schema", context.Request.Scheme);
+            result.Add("X-Headers", "----------------------------------------------------------------------------------------------");
+
+            foreach (var item in context.Request.Headers)
+            {
+                if (item.Key.Contains(HeaderKey.X, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.Add($" + {item.Key}", item.Value.ToString());
+                }
+            }
         }
     }
 }

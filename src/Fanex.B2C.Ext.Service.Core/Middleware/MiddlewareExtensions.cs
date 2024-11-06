@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Fanex.B2C.Ext.Service.Core.Extensions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
@@ -112,7 +113,7 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
                 => cache.Set(BuildKey(key), value, ByPassUMCacheTime);
 
             private string BuildKey(string key)
-                => $"{key}:{httpContextAccessor.HttpContext?.Connection.RemoteIpAddress.ToString()}";
+                => $"{key}:{httpContextAccessor.HttpContext?.Request.GetClientIP()}";
         }
     }
 }
