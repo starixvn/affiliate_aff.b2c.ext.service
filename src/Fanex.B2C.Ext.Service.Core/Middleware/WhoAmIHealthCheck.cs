@@ -44,21 +44,17 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
             var context = httpContextAccessor.HttpContext;
             result.Add("Local Ip", context.Connection.LocalIpAddress.ToString());
             result.Add("Local Port", context.Connection.LocalPort);
-            result.Add("Remote Ip", context.Connection.RemoteIpAddress.ToString());
-            result.Add("Remote Port", context.Connection.RemotePort);
-            result.Add("Client Ip", context.Request.GetClientIP());
+            result.Add("Client Ip", context.Connection.RemoteIpAddress.ToString());
+            result.Add("Actual Client Ip", context.Request.GetClientIP());
             result.Add("Server Time", DateTimeOffset.Now.UtcDateTime.ToString(CultureInfo.InvariantCulture));
             result.Add("Last Upadted", File.GetCreationTime(typeof(WhoAmIHealthCheck).Assembly.Location).ToString(CultureInfo.InvariantCulture));
             result.Add("Host", context.Request.Host);
             result.Add("Schema", context.Request.Scheme);
-            result.Add("X-Headers", "----------------------------------------------------------------------------------------------");
+            result.Add("X-Headers", "---------------------------------");
 
-            foreach (var item in context.Request.Headers)
+            foreach (var item in context.Request.Headers.Where(i => i.Key.Contains(HeaderKey.X, StringComparison.OrdinalIgnoreCase)))
             {
-                if (item.Key.Contains(HeaderKey.X, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.Add($" + {item.Key}", item.Value.ToString());
-                }
+                result.Add($" + {item.Key}", item.Value.ToString());
             }
         }
     }
