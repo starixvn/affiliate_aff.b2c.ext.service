@@ -39,6 +39,16 @@
       "username": "YashBet_API",
       "password": "DTGmCb8rFxefnKdhFWjHGXWZH9vm5EE0l2c8xZ26kkg=",
       "SupportedLicensees": [ "N8Y" ]
+    },
+    {
+      "Username": "S1_API",
+      "Password": "+BA1EhtKu0vI46SuE94dWqoXjPLHSipPlu2kKHRYpgA=",
+      "SupportedLicensees": []
+    },
+    {
+      "Username": "S1_EXT",
+      "Password": "/ND3V94asxk9Ch9SiVwhPBaI3j9tKopS9t1UfJL4fg4=",
+      "SupportedLicensees": [ "N88" ]
     }
   ]
 }
