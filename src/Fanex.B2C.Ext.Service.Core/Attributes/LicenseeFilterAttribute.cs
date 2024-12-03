@@ -14,13 +14,20 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
             var username = context.HttpContext.User.Identity.Name;
             var userInfo = userListAccessor.Value.Find(x => x.UserName.Equals(username));
 
-            var isValidLicensee = userInfo != null && context.ActionArguments
-                .FirstOrDefault(x => x.Key.Contains("criteria")).Value is ILicenseeCode criteria
-                && userInfo.SupportedLicensees.Exists(licen => string.Equals(criteria.LicenseeCode, licen, StringComparison.OrdinalIgnoreCase));
-
-            if (!isValidLicensee)
+            if (userInfo.SupportedLicensees is null)
             {
-                context.Result = new BadRequestObjectResult("The Licensee is invalid or unsupport!");
+                context.Result = new UnauthorizedObjectResult("You are not authorized on this function!");
+            }
+            else
+            {
+                var isValidLicensee = userInfo != null && context.ActionArguments
+                        .FirstOrDefault(x => x.Key.Contains("criteria")).Value is ILicenseeCode criteria
+                        && userInfo.SupportedLicensees.Exists(licen => string.Equals(criteria.LicenseeCode, licen, StringComparison.OrdinalIgnoreCase));
+
+                if (!isValidLicensee)
+                {
+                    context.Result = new BadRequestObjectResult("The Licensee is invalid or unsupport!");
+                }
             }
         }
     }

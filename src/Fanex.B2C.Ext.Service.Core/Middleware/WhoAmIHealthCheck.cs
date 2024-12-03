@@ -42,6 +42,7 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
         private void AddExtraServerInfo(IDictionary<string, object> result)
         {
             var context = httpContextAccessor.HttpContext;
+            result.Add("From Internal", context.Request.FromInternal());
             result.Add("Local Ip", context.Connection.LocalIpAddress.ToString());
             result.Add("Local Port", context.Connection.LocalPort);
             result.Add("Client Ip", context.Connection.RemoteIpAddress.ToString());
