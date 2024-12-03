@@ -7,9 +7,9 @@ namespace Fanex.B2C.Ext.Service.Core.Extensions
 {
     public static class HttpRequestExtensions
     {
+        private const string IntDomainName = "intb2c";
         private const string IPv4Regex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
         private static readonly string HostName = Dns.GetHostName();
-        private static readonly string IntDomainName = "intb2c";
 
         public static bool FromInternal(this HttpRequest request)
             => HostName.Contains(request.Host.Host, StringComparison.OrdinalIgnoreCase) || request.Host.Host.Contains(IntDomainName, StringComparison.OrdinalIgnoreCase);
