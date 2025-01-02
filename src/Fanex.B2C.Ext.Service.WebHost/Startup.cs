@@ -4,8 +4,8 @@ using Fanex.B2C.Ext.Service.Core.Middleware;
 using Fanex.B2C.Ext.Service.Core.Models;
 using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Services;
+using Fanex.Data;
 using Fanex.Data.Repository;
-using Fanex.Data.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -60,7 +60,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
             services.Configure<List<User>>(configuration.GetSection("Users"));
 
-            services.AddFanexSql(configuration);
+            services.AddFanexData(configuration);
 
             services.AddResponseCaching(options =>
             {
@@ -132,7 +132,6 @@ namespace Fanex.B2C.Ext.Service.WebHost
                     });
             }
 
-            app.UseStaticResource(env.IsDevelopment());
             app.UseUnderMaintenance();
             app.UseStatusCodePagesWithReExecute("/Error", "?code={0}");
             app.UseJWTokenOnPage();

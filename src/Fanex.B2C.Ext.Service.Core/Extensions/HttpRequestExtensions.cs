@@ -10,6 +10,7 @@ namespace Fanex.B2C.Ext.Service.Core.Extensions
         private const string IntDomainName = "intb2c";
         private const string IPv4Regex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
         private static readonly string HostName = Dns.GetHostName();
+        private static readonly char[] Separator = [','];
 
         public static bool FromInternal(this HttpRequest request)
             => HostName.Contains(request.Host.Host, StringComparison.OrdinalIgnoreCase) || request.Host.Host.Contains(IntDomainName, StringComparison.OrdinalIgnoreCase);
@@ -44,7 +45,7 @@ namespace Fanex.B2C.Ext.Service.Core.Extensions
                 return null;
             }
 
-            var ipList = ips.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())
+            var ipList = ips.Split(Separator, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())
                         .Where(i => Regex.IsMatch(i, IPv4Regex, RegexOptions.None, TimeSpan.FromSeconds(2)));
 
             return ipList.FirstOrDefault();
