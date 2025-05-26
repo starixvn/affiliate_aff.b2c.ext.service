@@ -8,53 +8,137 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
 {
     public class UserManagementServiceTest
     {
-        private readonly List<User> users = new List<User> { new User { UserName = "test", Password = "1234".Sha256() } };
+        private readonly List<User> _users;
         private readonly IOptions<List<User>> _mockUsers;
+        private readonly UserManagementService _service;
 
         public UserManagementServiceTest()
         {
+            _users = new List<User>
+            {
+                new User
+                {
+                    UserName = "testUser",
+                    Password = "testPassword".Sha256()
+                }
+            };
+
             _mockUsers = Substitute.For<IOptions<List<User>>>();
+            _mockUsers.Value.Returns(_users);
+
+            _service = new UserManagementService(_mockUsers);
         }
 
         [Fact]
-        public void IsValidUser_WhenCalled_GenerateHasedPassword()
+        public void IsValidUser_WithValidCredentials_ReturnsTrue()
         {
-            //Arrange
-            var rawUser = new User
-            {
-                UserName = "UserName",
-                Password = "Password"
-            };
-            var hashedPassword = rawUser.Password.Sha256();
-            _mockUsers.Value.Returns(new List<User> { new User { UserName = rawUser.UserName, Password = hashedPassword } });
+            // Arrange
+            var username = "testUser";
+            var password = "testPassword";
 
-            var userManagementService = new UserManagementService(_mockUsers);
+            // Act
+            var result = _service.IsValidUser(username, password);
 
-            //Action
-            var result = userManagementService.IsValidUser(rawUser.UserName, rawUser.Password);
-
-            //Assert
+            // Assert
             Assert.True(result);
         }
 
-
-        [Theory]
-        [InlineData("test", "123", false)]
-        [InlineData(null, null, false)]
-        [InlineData(null, "1234", false)]
-        [InlineData("test", "", false)]
-        [InlineData("test", "1234", true)]
-        public void IsValidUser_WhenCalled_ReturnCorrectResult(string userName, string pass, bool expectedResult)
+        [Fact]
+        public void IsValidUser_WithInvalidUsername_ReturnsFalse()
         {
-            //Arrange
-            _mockUsers.Value.Returns(users);
-            var userManagementService = new UserManagementService(_mockUsers);
+            // Arrange
+            var username = "invalidUser";
+            var password = "testPassword";
 
-            //Action
-            var result = userManagementService.IsValidUser(userName, pass);
+            // Act
+            var result = _service.IsValidUser(username, password);
 
-            //Assert
-            Assert.Equal(expectedResult, result);
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsValidUser_WithInvalidPassword_ReturnsFalse()
+        {
+            // Arrange
+            var username = "testUser";
+            var password = "invalidPassword";
+
+            // Act
+            var result = _service.IsValidUser(username, password);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsValidUser_WithNullUsername_ReturnsFalse()
+        {
+            // Arrange
+            string username = null;
+            var password = "testPassword";
+
+            // Act
+            var result = _service.IsValidUser(username, password);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsValidUser_WithNullPassword_ReturnsFalse()
+        {
+            // Arrange
+            var username = "testUser";
+            string password = null;
+
+            // Act
+            var result = _service.IsValidUser(username, password);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsValidUser_WithEmptyUsername_ReturnsFalse()
+        {
+            // Arrange
+            var username = string.Empty;
+            var password = "testPassword";
+
+            // Act
+            var result = _service.IsValidUser(username, password);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsValidUser_WithEmptyPassword_ReturnsFalse()
+        {
+            // Arrange
+            var username = "testUser";
+            var password = string.Empty;
+
+            // Act
+            var result = _service.IsValidUser(username, password);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsValidUser_WithCaseSensitiveUsername_ReturnsFalse()
+        {
+            // Arrange
+            var username = "TESTUSER";
+            var password = "testPassword";
+
+            // Act
+            var result = _service.IsValidUser(username, password);
+
+            // Assert
+            Assert.False(result);
         }
     }
 }
