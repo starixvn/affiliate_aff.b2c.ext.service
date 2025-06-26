@@ -1,9 +1,8 @@
-﻿using Fanex.B2C.Ext.Service.Core.Models.Criteria;
-using Fanex.Data;
+﻿using Fanex.Data;
 using Fanex.Data.Repository;
 using System.ComponentModel.DataAnnotations;
 
-namespace Fanex.B2C.Ext.Service.Core.Models.MetaModel
+namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
 {
     public class AffInfoCriteria : CriteriaBase, ILicenseeCode
     {

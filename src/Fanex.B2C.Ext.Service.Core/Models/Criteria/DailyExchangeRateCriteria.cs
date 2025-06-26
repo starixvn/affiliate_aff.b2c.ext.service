@@ -1,7 +1,7 @@
 ﻿using Fanex.Data.Repository;
 using System.ComponentModel.DataAnnotations;
 
-namespace Fanex.B2C.Ext.Service.Core.Models.MetaModel
+namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
 {
     public class DailyExchangeRateCriteria : CriteriaBase
     {

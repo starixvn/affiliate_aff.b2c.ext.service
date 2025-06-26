@@ -69,10 +69,16 @@ namespace Fanex.B2C.Ext.Service.WebHost
 
             ConfigAuthentication(services);
 
-            services.AddAuthorizationBuilder()
-                .SetDefaultPolicy(new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
-                .RequireAuthenticatedUser()
-                .Build());
+            services.AddAuthorization(options =>
+            {
+                // Set default policy
+                options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .Build();
+
+                // Add custom policies
+                options.AddCustomPolicies();
+            });
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -144,8 +150,9 @@ namespace Fanex.B2C.Ext.Service.WebHost
             services.AddScoped<IAffililateInfoService, AffililateInfoService>();
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
+            services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IPFilterAttribute>();
-            services.AddScoped<LicenseeFilterAttribute>();
+            services.AddCustomAuthorization();
 
             services.AddUnderMaintenance(configuration);
         }

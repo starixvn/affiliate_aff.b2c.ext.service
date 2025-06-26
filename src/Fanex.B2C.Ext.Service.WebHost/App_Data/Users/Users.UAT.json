@@ -3,52 +3,68 @@
     {
       "username": "B2C_API",
       "password": "7AmOjLpYsf6AuJvzGHQxBh84TCpd8Jt6qXEYul7PL4I=",
-      "SupportedLicensees": [ "N88", "N8B", "N8G" ]
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
     },
     {
       "username": "B2C_EXT",
       "password": "TXLG3+PB6FyM/jClnPpmKg/92Gf41TZFzYv4eiM8GDY=",
-      "SupportedLicensees": [ "N88", "N8B", "N8G" ]
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
     },
     {
       "username": "B2C_SERVICE",
       "password": "54ftCR156UG1GNofZDyNd1n40vrzj8sD/eCcnMGYtdo=",
-      "SupportedLicensees": [ "N88", "N8B", "N8G" ]
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
     },
     {
       "username": "N88_API",
       "password": "Sok9SsyE5Qzkf0H5dTuOLkj1/XPO/vcGlPqBtYgmj9A=",
-      "SupportedLicensees": [ "N88" ]
+      "SupportedLicensees": [ "N88" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
     },
     {
       "username": "N8B_API",
       "password": "/55MyPAjGpaRU49HpFyxkIaUnzUiX6XCVG5c66qMI28=",
-      "SupportedLicensees": [ "N8B" ]
+      "SupportedLicensees": [ "N8B" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
     },
     {
       "username": "N8G_API",
       "password": "0f0vE2UOHKSTfuYga5CsECF66GHHw3UaahupSag9Y2c=",
-      "SupportedLicensees": [ "N8G" ]
-    },
-    {
-      "username": "N8Y_API",
-      "password": "XKZ09YrqbsTOEwgevG2RmzGvMkxCkYy1Az35aAAHcWc=",
-      "SupportedLicensees": [ "N8Y" ]
-    },
-    {
-      "username": "YashBet_API",
-      "password": "DTGmCb8rFxefnKdhFWjHGXWZH9vm5EE0l2c8xZ26kkg=",
-      "SupportedLicensees": [ "N8Y" ]
+      "SupportedLicensees": [ "N8G" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
     },
     {
       "Username": "S1_API",
       "Password": "+BA1EhtKu0vI46SuE94dWqoXjPLHSipPlu2kKHRYpgA=",
-      "SupportedLicensees": []
+      "SupportedLicensees": [],
+      "SupportedFunctions": [ "Exchange" ]
     },
     {
       "Username": "S1_EXT",
       "Password": "/ND3V94asxk9Ch9SiVwhPBaI3j9tKopS9t1UfJL4fg4=",
-      "SupportedLicensees": [ "N88" ]
+      "SupportedLicensees": [ "N88" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
+    },
+    {
+      "Username": "12B_EXT",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "12B" ],
+      "SupportedFunctions": [ "Statistics" ]
+    },
+    {
+      "Username": "12B_API",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "12B" ],
+      "SupportedFunctions": [ "Statistics" ]
+    },
+    {
+      "Username": "EXT_AFF_API",
+      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G", "12B" ],
+      "SupportedFunctions": [ "AffInfo", "Statistics", "Exchange" ]
     }
   ]
 }

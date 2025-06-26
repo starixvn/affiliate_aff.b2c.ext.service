@@ -7,5 +7,7 @@
         public string Password { get; set; }
 
         public List<string> SupportedLicensees { get; set; }
+
+        public List<string> SupportedFunctions { get; set; }
     }
 }
