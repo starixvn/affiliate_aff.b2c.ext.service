@@ -15,8 +15,12 @@
     <Setting Key="N8G_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN8G.Affiliate_N8G.wsv_afinet" />
     <Setting Key="N8G_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN8G.Affiliate_N8G.wsv_afinet" />
   </Function>
+  <Function Name="12B_Affiliate_Information">
+    <Setting Key="12B_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
+    <Setting Key="12B_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
+  </Function>
   <Function Name="12B_Statistics_Information">
-    <Setting Key="12B_Aff_API_AffMediaChannel_Sel" SpName="Aff_API_AffMediaChannel_Sel_UAT3" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
-    <Setting Key="12B_Aff_API_ClickStatistic_Sel" SpName="Aff_API_ClickStatistic_Sel_UAT3" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
+    <Setting Key="12B_Aff_API_AffMediaChannel_Sel" SpName="Aff_API_AffMediaChannel_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
+    <Setting Key="12B_Aff_API_ClickStatistic_Sel" SpName="Aff_API_ClickStatistic_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
   </Function>
 </Functions>

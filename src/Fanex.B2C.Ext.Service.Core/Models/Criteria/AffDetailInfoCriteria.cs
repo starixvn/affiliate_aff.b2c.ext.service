@@ -1,15 +1,16 @@
 ﻿using Fanex.Data;
 using Fanex.Data.Repository;
+using Fanex.B2C.Ext.Service.Core.Constant;
 using System.ComponentModel.DataAnnotations;
 
 namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
 {
     public class AffDetailInfoCriteria : CriteriaBase, ILicenseeCode
     {
-        [Range(1, int.MaxValue, ErrorMessage = "PageIndex must be at least 1")]
+        [Range(Pagination.MinPageIndex, Pagination.MaxPageIndex, ErrorMessage = "PageIndex must be between 1 and 1,000,000")]
         public int PageIndex { get; set; } = 1;
 
-        [Range(1, 2000, ErrorMessage = "PageSize must be between 1 and 2000")]
+        [Range(Pagination.MinPageSize, Pagination.MaxPageSizeAffDetailInfo, ErrorMessage = "PageSize must be between 1 and 2000")]
         public int PageSize { get; set; } = 2000;
 
         [SpParam(Ignored = true)]

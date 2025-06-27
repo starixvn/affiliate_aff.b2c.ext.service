@@ -1,5 +1,6 @@
 using Fanex.Data;
 using Fanex.Data.Repository;
+using Fanex.B2C.Ext.Service.Core.Constant;
 using System.ComponentModel.DataAnnotations;
 
 namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
@@ -14,11 +15,11 @@ namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
         [SpParam(SqlParamName = "ToDate")]
         public DateTime ToDate { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "PageIndex must be at least 1")]
+        [Range(Pagination.MinPageIndex, Pagination.MaxPageIndex, ErrorMessage = "PageIndex must be between 1 and 1,000,000")]
         [SpParam(SqlParamName = "PageIndex")]
         public int PageIndex { get; set; } = 1;
 
-        [Range(1, 1000, ErrorMessage = "PageSize must be between 1 and 1000")]
+        [Range(Pagination.MinPageSize, Pagination.MaxPageSizeClickStatistic, ErrorMessage = "PageSize must be between 1 and 1000")]
         [SpParam(SqlParamName = "PageSize")]
         public int PageSize { get; set; } = 1000;
 

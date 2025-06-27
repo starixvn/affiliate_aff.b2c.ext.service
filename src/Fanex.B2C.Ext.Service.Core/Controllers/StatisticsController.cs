@@ -1,5 +1,7 @@
 using Fanex.B2C.Ext.Service.Core.Attributes;
 using Fanex.B2C.Ext.Service.Core.Authorization;
+using Fanex.B2C.Ext.Service.Core.Constant;
+using Fanex.B2C.Ext.Service.Core.Extensions;
 using Fanex.B2C.Ext.Service.Core.Models.Criteria;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -29,7 +31,7 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
             var authResult = await authorizationService.AuthorizeAsync(
                 User, criteria.LicenseeCode, new LicenseeRequirement(criteria.LicenseeCode));
 
-            if (!authResult.Succeeded)
+            if (!authResult.Succeeded || !criteria.LicenseeCode.MatchWith(Licensee._12B))
             {
                 return StatusCode(403, "The licensee is either invalid or not authorized to use this function!");
             }
@@ -51,7 +53,7 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
             var authResult = await authorizationService.AuthorizeAsync(
                 User, criteria.LicenseeCode, new LicenseeRequirement(criteria.LicenseeCode));
 
-            if (!authResult.Succeeded)
+            if (!authResult.Succeeded || !criteria.LicenseeCode.MatchWith(Licensee._12B))
             {
                 return StatusCode(403, "The licensee is either invalid or not authorized to use this function!");
             }

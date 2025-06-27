@@ -50,19 +50,19 @@
     },
     {
       "Username": "12B_EXT",
-      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "Password": "jgya0pbm8MS3dEf5TMJjd23modKk05ZRn/O4EWb1Ync=",
       "SupportedLicensees": [ "12B" ],
       "SupportedFunctions": [ "Statistics" ]
     },
     {
       "Username": "12B_API",
-      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "Password": "xh1eexzrDM/Fz8JYl4A037MwUDoNhhHFSvU2axR79vU=",
       "SupportedLicensees": [ "12B" ],
       "SupportedFunctions": [ "Statistics" ]
     },
     {
       "Username": "EXT_AFF_API",
-      "Password": "XQdVaeEwz3VubLyVfizeCI6gdZCx9oBJh3u6GfoRe94=",
+      "Password": "JpO/f/5aJvn1U0O0QHV5nhhrwZBmtij2BpTnvOW4oVw=",
       "SupportedLicensees": [ "N88", "N8B", "N8G", "12B" ],
       "SupportedFunctions": [ "AffInfo", "Statistics", "Exchange" ]
     }
