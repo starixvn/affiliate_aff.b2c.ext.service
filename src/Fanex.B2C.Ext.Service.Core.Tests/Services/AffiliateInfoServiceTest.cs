@@ -1,5 +1,5 @@
 using Fanex.B2C.Ext.Service.Core.Models.DTO;
-using Fanex.B2C.Ext.Service.Core.Models.MetaModel;
+using Fanex.B2C.Ext.Service.Core.Models.Criteria;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Fanex.Data.Repository;
 using Newtonsoft.Json;

@@ -1,5 +1,5 @@
 ﻿using Fanex.B2C.Ext.Service.Core.Attributes;
-using Fanex.B2C.Ext.Service.Core.Models.MetaModel;
+using Fanex.B2C.Ext.Service.Core.Models.Criteria;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ using System.Net;
 
 namespace Fanex.B2C.Ext.Service.Core.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Exchange")]
     [ApiController]
     [ServiceFilter(typeof(IPFilterAttribute))]
     public class ExchangeController(

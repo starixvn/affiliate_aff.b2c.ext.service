@@ -4,19 +4,23 @@
     <Setting Key="Aff_API_ExchangeDailyOanda_Sel" SpName="Aff_API_ExchangeDailyOanda_Sel" DbName="DBEXT.bodb02.wsv_afinet" />
   </Function>
   <Function Name="N88_Affiliate_Information">
-    <Setting Key="N88_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFF.Affiliate_N88.wsv_afinet" />
-    <Setting Key="N88_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFF.Affiliate_N88.wsv_afinet" />
+    <Setting Key="N88_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N88.wsv_afinet" />
+    <Setting Key="N88_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN88.Affiliate_N88.wsv_afinet" />
   </Function>
   <Function Name="N8B_Affiliate_Information">
-    <Setting Key="N8B_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFF.Affiliate_N8B.wsv_afinet" />
-    <Setting Key="N8B_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFF.Affiliate_N8B.wsv_afinet" />
+    <Setting Key="N8B_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN8B.Affiliate_N8B.wsv_afinet" />
+    <Setting Key="N8B_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN8B.Affiliate_N8B.wsv_afinet" />
   </Function>
   <Function Name="N8G_Affiliate_Information">
-    <Setting Key="N8G_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFF.Affiliate_N8G.wsv_afinet" />
-    <Setting Key="N8G_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFF.Affiliate_N8G.wsv_afinet" />
+    <Setting Key="N8G_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN8G.Affiliate_N8G.wsv_afinet" />
+    <Setting Key="N8G_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFFN8G.Affiliate_N8G.wsv_afinet" />
   </Function>
-  <Function Name="YashBet_Affiliate_Information">
-    <Setting Key="N8Y_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFF.Affiliate_YashBet.wsv_afinet" />
-    <Setting Key="N8Y_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFF.Affiliate_YashBet.wsv_afinet" />
+  <Function Name="12B_Affiliate_Information">
+    <Setting Key="12B_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
+    <Setting Key="12B_Aff_API_AffiliateDetailInfo_Sel" SpName="Aff_API_AffiliateDetailInfo_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
+  </Function>
+  <Function Name="12B_Statistics_Information">
+    <Setting Key="12B_Aff_API_AffMediaChannel_Sel" SpName="Aff_API_AffMediaChannel_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
+    <Setting Key="12B_Aff_API_ClickStatistic_Sel" SpName="Aff_API_ClickStatistic_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
   </Function>
 </Functions>
