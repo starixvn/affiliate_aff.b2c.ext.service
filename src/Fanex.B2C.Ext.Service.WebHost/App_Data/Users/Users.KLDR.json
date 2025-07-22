@@ -1,0 +1,70 @@
+{
+  "Users": [
+    {
+      "username": "B2C_API",
+      "password": "lMMUavji3Hbd04FbmViJPi1NwajauTyiz5qYHGsW9Gc=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
+    },
+    {
+      "username": "B2C_EXT",
+      "password": "qHAK+0tjzV2YA0XU0IuqQAzXnB886iIHP+VOoAq7cvE=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
+    },
+    {
+      "username": "B2C_SERVICE",
+      "password": "O1Aoq3VpMAR5gFtRtkL+BivbQpmXXGOr6EOOuduZ/5Q=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
+    },
+    {
+      "username": "N88_API",
+      "password": "nFOjELsfDdFrar80Gd/BKyGG3ZLGQ+ZuliTpv82L5js=",
+      "SupportedLicensees": [ "N88" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
+    },
+    {
+      "username": "N8B_API",
+      "password": "JZfuELQVS67l2/oBzlW8THFe+8XZXdHrYPQxRlDVU1Y=",
+      "SupportedLicensees": [ "N8B" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
+    },
+    {
+      "username": "N8G_API",
+      "password": "Y9YN76RtW039j90/PrIjD2R1aO6OdaN6qn9ZHc/02uE=",
+      "SupportedLicensees": [ "N8G" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
+    },
+    {
+      "Username": "S1_API",
+      "Password": "ysTwrLai5UT7S/hArAOoIk1417yvE3Hvx4dvASNKvJk=",
+      "SupportedLicensees": [],
+      "SupportedFunctions": [ "Exchange" ]
+    },
+    {
+      "Username": "S1_EXT",
+      "Password": "AcycxHa1cLkBCC/UMVh1CZ8YyPBNRODfADVq+UHFPPo=",
+      "SupportedLicensees": [ "N88" ],
+      "SupportedFunctions": [ "AffInfo", "Exchange" ]
+    },
+    {
+      "Username": "12B_EXT",
+      "Password": "jgya0pbm8MS3dEf5TMJjd23modKk05ZRn/O4EWb1Ync=",
+      "SupportedLicensees": [ "12B" ],
+      "SupportedFunctions": [ "Statistics" ]
+    },
+    {
+      "Username": "12B_API",
+      "Password": "xh1eexzrDM/Fz8JYl4A037MwUDoNhhHFSvU2axR79vU=",
+      "SupportedLicensees": [ "12B" ],
+      "SupportedFunctions": [ "Statistics" ]
+    },
+    {
+      "Username": "EXT_AFF_API",
+      "Password": "JpO/f/5aJvn1U0O0QHV5nhhrwZBmtij2BpTnvOW4oVw=",
+      "SupportedLicensees": [ "N88", "N8B", "N8G", "12B" ],
+      "SupportedFunctions": [ "AffInfo", "Statistics", "Exchange" ]
+    }
+  ]
+}

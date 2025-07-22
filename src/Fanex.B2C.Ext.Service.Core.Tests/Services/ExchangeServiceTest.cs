@@ -12,7 +12,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
         public ExchangeServiceTest()
         {
             DbSettingProviderManager
-             .StartTestingSession()
+             .StartNewSession()
              .Run();
         }
 

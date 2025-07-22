@@ -1,5 +1,4 @@
 using Fanex.B2C.Ext.Service.Core.Helper;
-using Fanex.Data;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using System.Data.SqlClient;
@@ -73,24 +72,6 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
             Assert.Contains("Outer", result);
             Assert.Contains("Inner", result);
             Assert.True(result.IndexOf("Inner") > result.IndexOf("Outer"));
-        }
-
-        [Fact]
-        public void GenerateMessage_WhenCallWithObjectDbException_ReturnStringHaveObjectDBExcptionInfo()
-        {
-            //Arrange
-            var ex = new ObjectDbException("test", new Exception());
-
-            //Action
-            var result = ErrorMessageHelper.GenerateMessage(_mockHttpContext, ex);
-
-            //Assert
-            Assert.Contains("Server", result);
-            Assert.Contains("DbName", result);
-            Assert.Contains("SpName", result);
-            Assert.Contains("UserId", result);
-            Assert.Contains("Parameters", result);
-            Assert.Contains("CommandTimeout", result);
         }
     }
 }
