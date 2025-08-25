@@ -9,7 +9,7 @@ namespace Fanex.B2C.Ext.Service.Core.Authorization
         private readonly IOptions<List<User>> _userListAccessor = userListAccessor;
 
         protected override Task HandleRequirementAsync(
-            AuthorizationHandlerContext context, 
+            AuthorizationHandlerContext context,
             LicenseeRequirement requirement)
         {
             var username = context.User.Identity?.Name;
@@ -26,7 +26,7 @@ namespace Fanex.B2C.Ext.Service.Core.Authorization
                 return Task.CompletedTask;
             }
 
-            var isValidLicensee = userInfo.SupportedLicensees.Exists(licen => 
+            var isValidLicensee = userInfo.SupportedLicensees.Exists(licen =>
                 string.Equals(requirement.LicenseeCode, licen, StringComparison.OrdinalIgnoreCase));
 
             if (isValidLicensee)
@@ -41,4 +41,4 @@ namespace Fanex.B2C.Ext.Service.Core.Authorization
             return Task.CompletedTask;
         }
     }
-} 
+}

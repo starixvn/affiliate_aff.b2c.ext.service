@@ -1,6 +1,6 @@
+using Fanex.B2C.Ext.Service.Core.Constant;
 using Fanex.Data;
 using Fanex.Data.Repository;
-using Fanex.B2C.Ext.Service.Core.Constant;
 using System.ComponentModel.DataAnnotations;
 
 namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
@@ -30,4 +30,4 @@ namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
 
         public override bool IsValid() => true;
     }
-} 
+}

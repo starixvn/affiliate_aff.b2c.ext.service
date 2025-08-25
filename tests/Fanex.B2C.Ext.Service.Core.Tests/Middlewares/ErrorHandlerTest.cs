@@ -26,7 +26,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
             var errorHandler = new ErrorHandler(_mockNext, _mockLogger);
 
             //Action
-            await errorHandler.Invoke(Substitute.For<HttpContext>());
+            await errorHandler.Invoke(CreateMockHttpContext());
 
             // Assert
             await _mockNext.Received().Invoke(Arg.Any<HttpContext>());
@@ -36,7 +36,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
         public async Task Invoke_WhenCallInvokeAndHasException_ErrorHandlerHandleExceptionAndCallNextInvoke()
         {
             //Arrange
-            var context = Substitute.For<HttpContext>();
+            var context = CreateMockHttpContext();
             var reponse = Substitute.For<HttpResponse>();
             var features = Substitute.For<IFeatureCollection>();
 
@@ -64,7 +64,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
         public async Task Invoke_WhenCallNextInvokeAndThrowException_ErrorHandlerHandleException()
         {
             //Arrange
-            var context = Substitute.For<HttpContext>();
+            var context = CreateMockHttpContext();
             var reponse = Substitute.For<HttpResponse>();
             var features = Substitute.For<IFeatureCollection>();
 
@@ -87,6 +87,30 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
                 await _mockNext.Received().Invoke(Arg.Any<HttpContext>());
                 Assert.Equal((int)HttpStatusCode.InternalServerError, context.Response.StatusCode);
             }
+        }
+
+        private static HttpContext CreateMockHttpContext(string host = "localhost", string path = "/", string method = "GET", string clientIP = "127.0.0.1")
+        {
+            var context = Substitute.For<HttpContext>();
+            var request = Substitute.For<HttpRequest>();
+            var connection = Substitute.For<ConnectionInfo>();
+
+            // Setup request
+            request.Host.Returns(new HostString(host));
+            request.Path.Returns(new PathString(path));
+            request.Method.Returns(method);
+
+            // Setup connection
+            connection.RemoteIpAddress.Returns(System.Net.IPAddress.Parse(clientIP));
+
+            // Setup context
+            context.Request.Returns(request);
+            context.Connection.Returns(connection);
+
+            // CRITICAL: Link request back to context for GetClientIP extension method
+            request.HttpContext.Returns(context);
+
+            return context;
         }
     }
 }

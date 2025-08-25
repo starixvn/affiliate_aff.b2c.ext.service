@@ -6,4 +6,4 @@ namespace Fanex.B2C.Ext.Service.Core.Constant
         public const string Statistics = "Statistics";
         public const string Exchange = "Exchange";
     }
-} 
+}

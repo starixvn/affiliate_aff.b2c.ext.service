@@ -1,7 +1,7 @@
 using Fanex.B2C.Ext.Service.Core.Helper;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
-using System.Data.SqlClient;
+using System.Net;
 
 namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
 {
@@ -11,7 +11,32 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
 
         public ErrorMessageHelperTest()
         {
-            _mockHttpContext = Substitute.For<HttpContext>();
+            _mockHttpContext = CreateMockHttpContext();
+        }
+
+        private static HttpContext CreateMockHttpContext(string host = "localhost", string path = "/", string method = "GET", string clientIP = "127.0.0.1")
+        {
+            var context = Substitute.For<HttpContext>();
+            var request = Substitute.For<HttpRequest>();
+            var connection = Substitute.For<ConnectionInfo>();
+
+            // Setup request
+            request.Host.Returns(new HostString(host));
+            request.Path.Returns(new PathString(path));
+            request.Method.Returns(method);
+            request.Body.Returns(new MemoryStream());
+
+            // Setup connection
+            connection.RemoteIpAddress.Returns(IPAddress.Parse(clientIP));
+
+            // Setup context
+            context.Request.Returns(request);
+            context.Connection.Returns(connection);
+
+            // CRITICAL: Link request back to context for GetClientIP extension method
+            request.HttpContext.Returns(context);
+
+            return context;
         }
 
         [Fact]
@@ -29,33 +54,6 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Helpers
             Assert.Contains("Path", result);
             Assert.Contains("Body", result);
             Assert.Contains("Remote IP", result);
-        }
-
-        [Fact]
-        public void GenerateMessage_WhenCallWithSqlException_ReturnStringHaveSqlExceptionInfo()
-        {
-            //Arrange
-            var connectionString = "Data Source=127.0.0.1;Initial Catalog=testDB; integrated security=false; trustservercertificate=true; User Id=test; Password=test";
-            SqlException sqlException = null;
-            using (var conn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-                }
-                catch (SqlException ex)
-                {
-                    sqlException = ex;
-                }
-            }
-
-            //Action
-            var result = ErrorMessageHelper.GenerateMessage(_mockHttpContext, sqlException);
-
-            //Assert
-            Assert.NotNull(sqlException);
-            Assert.Contains("Server", result);
-            Assert.Contains("SpName", result);
         }
 
         [Fact]

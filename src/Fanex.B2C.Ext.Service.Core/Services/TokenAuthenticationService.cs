@@ -25,6 +25,14 @@ namespace Fanex.B2C.Ext.Service.Core.Services
             {
                 ExpiresIn = _tokenManagement.AccessExpiration
             };
+
+            // Handle null or empty request gracefully
+            if (request?.Username == null || string.IsNullOrWhiteSpace(request.Username) ||
+                string.IsNullOrWhiteSpace(request.Password))
+            {
+                return Tuple.Create<bool, Token>(false, token);
+            }
+
             var siteName = request.Username;
             var realUserName = request.Username;
 

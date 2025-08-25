@@ -27,4 +27,4 @@ namespace Fanex.B2C.Ext.Service.Core.Models.DTO
         public string AffMediaLink { get; set; }
         public string ChannelCode { get; set; }
     }
-} 
+}

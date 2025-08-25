@@ -12,4 +12,4 @@ namespace Fanex.B2C.Ext.Service.Core.Models.Criteria
 
         public override bool IsValid() => true;
     }
-} 
+}

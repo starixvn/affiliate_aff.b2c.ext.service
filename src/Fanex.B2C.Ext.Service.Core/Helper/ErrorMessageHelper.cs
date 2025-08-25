@@ -1,12 +1,10 @@
 ﻿namespace Fanex.B2C.Ext.Service.Core.Helper
 {
     using Fanex.B2C.Ext.Service.Core.Extensions;
-    using Fanex.Data;
     using Microsoft.AspNetCore.Http;
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Linq;
     using System.Text;
 
     public static class ErrorMessageHelper
