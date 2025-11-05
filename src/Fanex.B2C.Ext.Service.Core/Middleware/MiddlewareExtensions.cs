@@ -83,7 +83,7 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
                 await context.Response.WriteAsync(result);
             };
 
-            app.UseHealthChecks("/whoami", options: new HealthCheckOptions
+            app.UseHealthChecks("/healthz", options: new HealthCheckOptions
             {
                 AllowCachingResponses = false,
                 Predicate = _ => true,
