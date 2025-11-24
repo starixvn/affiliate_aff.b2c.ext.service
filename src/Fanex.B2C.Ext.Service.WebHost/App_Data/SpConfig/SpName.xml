@@ -2,6 +2,7 @@
 <Functions SiteId="32" SiteName="B2C_Api">
   <Function Name="Exchange_Daily_Rate">
     <Setting Key="Aff_API_ExchangeDailyOanda_Sel" SpName="Aff_API_ExchangeDailyOanda_Sel" DbName="DBEXT.bodb02.wsv_afinet" />
+    <Setting Key="Aff_API_ExchangeDailyOanda_Bid_Sel" SpName="Aff_API_ExchangeDailyOanda_Bid_Sel" DbName="DB052.bodb_12B.wsv_afinet" />
   </Function>
   <Function Name="N88_Affiliate_Information">
     <Setting Key="N88_Aff_API_AffiliateInfo_Sel" SpName="Aff_API_AffiliateInfo_Sel" DbName="DBAFFN88.Affiliate_N88.wsv_afinet" />

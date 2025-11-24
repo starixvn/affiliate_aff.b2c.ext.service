@@ -76,7 +76,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Constants
             // Act & Assert - Should enforce appropriate business limits
             clickStatisticRequest.PageSize.Should().BeLessOrEqualTo(Pagination.MaxPageSizeClickStatistic);
             affDetailInfoRequest.PageSize.Should().BeLessOrEqualTo(Pagination.MaxPageSizeAffDetailInfo);
-            
+
             clickStatisticRequest.PageIndex.Should().BeGreaterOrEqualTo(Pagination.MinPageIndex);
             affDetailInfoRequest.PageIndex.Should().BeGreaterOrEqualTo(Pagination.MinPageIndex);
         }
@@ -124,7 +124,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Constants
             // Act & Assert - Should support claim-based security
             userClaims.Should().ContainKey(CustomClaimType.Site);
             userClaims.Should().ContainKey(CustomClaimType.IsShowIPVN);
-            
+
             userClaims[CustomClaimType.Site].Should().Be("12B");
             userClaims[CustomClaimType.IsShowIPVN].Should().Be("true");
         }

@@ -138,9 +138,9 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
             // Assert - Should include server time information
             result.Status.Should().Be(HealthStatus.Healthy);
             result.Data.Should().ContainKey("Server Time");
-            result.Data.Should().ContainKey("Last Upadted");
+            result.Data.Should().ContainKey("Last Updated");
             result.Data["Server Time"].Should().NotBeNull();
-            result.Data["Last Upadted"].Should().NotBeNull();
+            result.Data["Last Updated"].Should().NotBeNull();
         }
 
         [Fact]
@@ -382,11 +382,11 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
 
             // Assert - Should include assembly version information
             result.Status.Should().Be(HealthStatus.Healthy);
-            result.Data.Should().ContainKey("Last Upadted");
-            result.Data["Last Upadted"].Should().NotBeNull();
+            result.Data.Should().ContainKey("Last Updated");
+            result.Data["Last Updated"].Should().NotBeNull();
 
             // Should be a valid date string
-            var lastUpdated = result.Data["Last Upadted"].ToString();
+            var lastUpdated = result.Data["Last Updated"].ToString();
             lastUpdated.Should().NotBeNullOrEmpty();
         }
 

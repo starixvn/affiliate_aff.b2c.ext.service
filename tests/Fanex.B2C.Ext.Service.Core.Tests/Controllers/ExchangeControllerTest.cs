@@ -1,6 +1,6 @@
 using Fanex.B2C.Ext.Service.Core.Controllers;
-using Fanex.B2C.Ext.Service.Core.Models.Criteria;
 using Fanex.B2C.Ext.Service.Core.Models.DTO;
+using Fanex.B2C.Ext.Service.Core.Models.Param;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -28,7 +28,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
             controller.ModelState.AddModelError("Error1", "Invalid");
 
             //Action
-            var result = await controller.Post(new DailyExchangeRateCriteria()) as ObjectResult;
+            var result = await controller.Post(new DailyExchangeRateParam()) as ObjectResult;
 
             //Assert
             Assert.Equal((int)HttpStatusCode.BadRequest, result?.StatusCode);
@@ -40,7 +40,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task Post_WhenCall_CallLogInformationAndReturnCorrect(string exchangeIds)
         {
             //Arrange
-            _exchangeService.GetDailyExchangeRateAsync(Arg.Any<DailyExchangeRateCriteria>()).Returns(new List<DailyExchangeRate>{new DailyExchangeRate {
+            _exchangeService.GetDailyExchangeRateAsync(Arg.Any<DailyExchangeRateParam>()).Returns(new List<DailyExchangeRate>{new DailyExchangeRate {
                 ExchangeId = 123,
                 Code = "USD",
                 Currency = "USD",
@@ -49,7 +49,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
             var controller = new ExchangeController(_logger, _exchangeService);
 
             //Action
-            var result = await controller.Post(new DailyExchangeRateCriteria { ExchangeIds = exchangeIds }) as ObjectResult;
+            var result = await controller.Post(new DailyExchangeRateParam { ExchangeIds = exchangeIds }) as ObjectResult;
 
             //Assert
             _logger.Received().LogInformation("Ext B2C - Get Daily Exchange Rate");
@@ -61,7 +61,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task Post_ShouldReturnOk_WhenValidDataProvided()
         {
             // Arrange - Valid exchange rate request scenario
-            var param = new DailyExchangeRateCriteria
+            var param = new DailyExchangeRateParam
             {
                 ExchangeIds = "USD,EUR,GBP"
             };
@@ -88,7 +88,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task Post_ShouldSanitizeExchangeIds_WhenProcessingRequest()
         {
             // Arrange - Exchange IDs sanitization scenario
-            var param = new DailyExchangeRateCriteria
+            var param = new DailyExchangeRateParam
             {
                 ExchangeIds = "  <script>alert('xss')</script>USD,EUR  "
             };
@@ -97,7 +97,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
                 new DailyExchangeRate { ExchangeId = 1, Code = "USD", Currency = "USD", Rate = 1.0m }
             };
 
-            _exchangeService.GetDailyExchangeRateAsync(Arg.Any<DailyExchangeRateCriteria>()).Returns(expectedRates);
+            _exchangeService.GetDailyExchangeRateAsync(Arg.Any<DailyExchangeRateParam>()).Returns(expectedRates);
             var controller = new ExchangeController(_logger, _exchangeService);
 
             // Act - Process request with potentially malicious input
@@ -117,7 +117,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task Post_ShouldSupportBusinessScenario_B2CExchangeRateRetrieval()
         {
             // Arrange - B2C exchange rate retrieval business scenario
-            var param = new DailyExchangeRateCriteria
+            var param = new DailyExchangeRateParam
             {
                 ExchangeIds = "USD,EUR,GBP,JPY,SGD"
             };
@@ -153,7 +153,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task Post_ShouldHandleVariousExchangeIdFormats_Correctly(string exchangeIds)
         {
             // Arrange - Various exchange ID formats scenario
-            var param = new DailyExchangeRateCriteria
+            var param = new DailyExchangeRateParam
             {
                 ExchangeIds = exchangeIds
             };
@@ -181,7 +181,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task Post_ShouldSupportBusinessScenario_RealTimeExchangeRateUpdates()
         {
             // Arrange - Real-time exchange rate updates business scenario
-            var param = new DailyExchangeRateCriteria
+            var param = new DailyExchangeRateParam
             {
                 ExchangeIds = "USD,EUR"
             };
@@ -210,7 +210,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task Post_ShouldSupportBusinessScenario_MultiCurrencySupport()
         {
             // Arrange - Multi-currency support business scenario
-            var param = new DailyExchangeRateCriteria
+            var param = new DailyExchangeRateParam
             {
                 ExchangeIds = "USD,EUR,GBP,JPY,SGD,HKD,CNY,THB,MYR,IDR"
             };
@@ -249,7 +249,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task Post_ShouldSupportBusinessScenario_SecurityInputValidation()
         {
             // Arrange - Security input validation business scenario
-            var param = new DailyExchangeRateCriteria
+            var param = new DailyExchangeRateParam
             {
                 ExchangeIds = "<img src=x onerror=alert('XSS')>USD</img>"
             };
@@ -258,7 +258,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
                 new DailyExchangeRate { ExchangeId = 1, Code = "USD", Currency = "USD", Rate = 1.0m }
             };
 
-            _exchangeService.GetDailyExchangeRateAsync(Arg.Any<DailyExchangeRateCriteria>()).Returns(safeRates);
+            _exchangeService.GetDailyExchangeRateAsync(Arg.Any<DailyExchangeRateParam>()).Returns(safeRates);
             var controller = new ExchangeController(_logger, _exchangeService);
 
             // Act - Process potentially malicious input
@@ -279,7 +279,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task Post_ShouldSupportBusinessScenario_EmptyExchangeRateResponse()
         {
             // Arrange - Empty exchange rate response business scenario
-            var param = new DailyExchangeRateCriteria
+            var param = new DailyExchangeRateParam
             {
                 ExchangeIds = "INVALID_CURRENCY"
             };
@@ -298,6 +298,43 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
             var returnedRates = okResult.Value as List<DailyExchangeRate>;
             returnedRates.Should().BeEmpty();
+        }
+
+        [Fact]
+        public async Task PostBidRate_WhenCallWith__InvalidModel_ReturnBadRequest()
+        {
+            //Arrange
+            var controller = new ExchangeController(_logger, _exchangeService);
+            controller.ModelState.AddModelError("Error1", "Bid Rate Invalid");
+
+            //Action
+            var result = await controller.PostBidRate(new DailyExchangeRateParam()) as ObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.BadRequest, result?.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("USD")]
+        [InlineData("USD ")]
+        public async Task PostBidRate_WhenCall_CallLogInformationAndReturnCorrect(string exchangeIds)
+        {
+            //Arrange
+            _exchangeService.GetDailyExchangeBidRateAsync(Arg.Any<DailyExchangeRateParam>()).Returns(new List<DailyExchangeRate>{new DailyExchangeRate {
+                ExchangeId = 123,
+                Code = "USD",
+                Currency = "USD",
+                Rate = 1,
+            }});
+            var controller = new ExchangeController(_logger, _exchangeService);
+
+            //Action
+            var result = await controller.PostBidRate(new DailyExchangeRateParam { ExchangeIds = exchangeIds }) as ObjectResult;
+
+            //Assert
+            _logger.Received().LogInformation("Ext B2C - Get Daily Exchange Bid Rate");
+            Assert.Single(result?.Value as List<DailyExchangeRate>);
+            Assert.Equal((int)HttpStatusCode.OK, result?.StatusCode);
         }
     }
 }

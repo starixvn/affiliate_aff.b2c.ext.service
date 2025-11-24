@@ -37,28 +37,16 @@
       "SupportedFunctions": [ "AffInfo", "Exchange" ]
     },
     {
-      "Username": "S1_API",
-      "Password": "+BA1EhtKu0vI46SuE94dWqoXjPLHSipPlu2kKHRYpgA=",
-      "SupportedLicensees": [],
-      "SupportedFunctions": [ "Exchange" ]
-    },
-    {
-      "Username": "S1_EXT",
-      "Password": "/ND3V94asxk9Ch9SiVwhPBaI3j9tKopS9t1UfJL4fg4=",
-      "SupportedLicensees": [ "N88" ],
-      "SupportedFunctions": [ "AffInfo", "Exchange" ]
-    },
-    {
       "Username": "12B_EXT",
       "Password": "QykNIVIZoFajF0IB8kwURtoQwIBx14GsMZvPibCxDqs=",
       "SupportedLicensees": [ "12B" ],
-      "SupportedFunctions": [ "Statistics" ]
+      "SupportedFunctions": [ "Statistics", "Exchange" ]
     },
     {
       "Username": "12B_API",
       "Password": "nYosuirccyKpufAfhapfiNpaq+DX8XWvt1/IQJ92N4k=",
       "SupportedLicensees": [ "12B" ],
-      "SupportedFunctions": [ "Statistics" ]
+      "SupportedFunctions": [ "Statistics", "Exchange" ]
     },
     {
       "Username": "EXT_AFF_API",

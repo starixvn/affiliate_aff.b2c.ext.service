@@ -1,5 +1,5 @@
 ﻿using Fanex.B2C.Ext.Service.Core.Attributes;
-using Fanex.B2C.Ext.Service.Core.Models.Criteria;
+using Fanex.B2C.Ext.Service.Core.Models.Param;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +17,7 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
     {
         [HttpPost]
         [Route("api/DailyExchangeRate")]
-        public async Task<IActionResult> Post([FromBody] DailyExchangeRateCriteria param)
+        public async Task<IActionResult> Post([FromBody] DailyExchangeRateParam param)
         {
             if (ModelState.IsValid)
             {
@@ -26,6 +26,22 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
                 param.ExchangeIds = WebUtility.HtmlEncode(param.ExchangeIds.Trim());
 
                 return Ok(await exchangeService.GetDailyExchangeRateAsync(param));
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost]
+        [Route("api/DailyExchangeBidRate")]
+        public async Task<IActionResult> PostBidRate([FromBody] DailyExchangeRateParam param)
+        {
+            if (ModelState.IsValid)
+            {
+                logger.LogInformation("Ext B2C - Get Daily Exchange Bid Rate");
+
+                param.ExchangeIds = WebUtility.HtmlEncode(param.ExchangeIds.Trim());
+
+                return Ok(await exchangeService.GetDailyExchangeBidRateAsync(param));
             }
 
             return BadRequest(ModelState);
