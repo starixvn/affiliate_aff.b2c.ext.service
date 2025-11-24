@@ -1,6 +1,6 @@
 using Fanex.B2C.Ext.Service.Core.Controllers;
-using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Models.Criteria;
+using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +40,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
             // Mock successful authorization
             _authorizationService.AuthorizeAsync(Arg.Any<System.Security.Claims.ClaimsPrincipal>(),
-                Arg.Any<object>(), Arg.Any<IAuthorizationRequirement>()).Returns(AuthorizationResult.Success());
+                Arg.Any<object>(), Arg.Any<IEnumerable<IAuthorizationRequirement>>()).Returns(AuthorizationResult.Success());
 
             var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
 
@@ -78,7 +78,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
             // Mock failed authorization
             _authorizationService.AuthorizeAsync(Arg.Any<System.Security.Claims.ClaimsPrincipal>(),
-                Arg.Any<object>(), Arg.Any<IAuthorizationRequirement>()).Returns(AuthorizationResult.Failed());
+                Arg.Any<object>(), Arg.Any<IEnumerable<IAuthorizationRequirement>>()).Returns(AuthorizationResult.Failed());
 
             var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
 
@@ -99,7 +99,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
             // Mock successful authorization
             _authorizationService.AuthorizeAsync(Arg.Any<System.Security.Claims.ClaimsPrincipal>(),
-                Arg.Any<object>(), Arg.Any<IAuthorizationRequirement>()).Returns(AuthorizationResult.Success());
+                Arg.Any<object>(), Arg.Any<IEnumerable<IAuthorizationRequirement>>()).Returns(AuthorizationResult.Success());
 
             var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
 
@@ -120,8 +120,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task GetClickStatisticAsync_WhenCall_CallLogInformationAndReturnCorrect()
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now,
@@ -131,11 +131,11 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
             var expectedResult = new List<ClickStatistic>
             {
-                new ClickStatistic 
-                { 
-                    ClickId = 1001, 
-                    AffId = 123, 
-                    AffCode = "AFF001", 
+                new ClickStatistic
+                {
+                    ClickId = 1001,
+                    AffId = 123,
+                    AffCode = "AFF001",
                     AffUserName = "TestUser",
                     IP = "192.168.1.1",
                     Browser = "Chrome",
@@ -147,7 +147,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
             // Mock successful authorization
             _authorizationService.AuthorizeAsync(Arg.Any<System.Security.Claims.ClaimsPrincipal>(),
-                Arg.Any<object>(), Arg.Any<IAuthorizationRequirement>()).Returns(AuthorizationResult.Success());
+                Arg.Any<object>(), Arg.Any<IEnumerable<IAuthorizationRequirement>>()).Returns(AuthorizationResult.Success());
 
             var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
 
@@ -165,8 +165,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task GetClickStatisticAsync_WhenInvalidModel_ReturnBadRequest()
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now
@@ -186,8 +186,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task GetClickStatisticAsync_WhenAuthorizationFails_ReturnForbidden()
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now
@@ -195,7 +195,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
             // Mock failed authorization
             _authorizationService.AuthorizeAsync(Arg.Any<System.Security.Claims.ClaimsPrincipal>(),
-                Arg.Any<object>(), Arg.Any<IAuthorizationRequirement>()).Returns(AuthorizationResult.Failed());
+                Arg.Any<object>(), Arg.Any<IEnumerable<IAuthorizationRequirement>>()).Returns(AuthorizationResult.Failed());
 
             var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
 
@@ -212,8 +212,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task GetClickStatisticAsync_WhenWrongLicenseeCode_ReturnForbidden()
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "N8B", // Wrong licensee code
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now
@@ -221,7 +221,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
             // Mock successful authorization
             _authorizationService.AuthorizeAsync(Arg.Any<System.Security.Claims.ClaimsPrincipal>(),
-                Arg.Any<object>(), Arg.Any<IAuthorizationRequirement>()).Returns(AuthorizationResult.Success());
+                Arg.Any<object>(), Arg.Any<IEnumerable<IAuthorizationRequirement>>()).Returns(AuthorizationResult.Success());
 
             var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
 
@@ -241,8 +241,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         public async Task GetClickStatisticAsync_WithValidPagination_ReturnCorrect(int pageIndex, int pageSize)
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now,
@@ -255,7 +255,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
             // Mock successful authorization
             _authorizationService.AuthorizeAsync(Arg.Any<System.Security.Claims.ClaimsPrincipal>(),
-                Arg.Any<object>(), Arg.Any<IAuthorizationRequirement>()).Returns(AuthorizationResult.Success());
+                Arg.Any<object>(), Arg.Any<IEnumerable<IAuthorizationRequirement>>()).Returns(AuthorizationResult.Success());
 
             var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
 
@@ -270,4 +270,4 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
 
         #endregion
     }
-} 
+}

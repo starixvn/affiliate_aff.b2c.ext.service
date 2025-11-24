@@ -30,4 +30,4 @@ namespace Fanex.B2C.Ext.Service.Core.Extensions
             return options;
         }
     }
-} 
+}

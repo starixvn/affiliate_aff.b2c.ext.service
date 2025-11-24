@@ -62,4 +62,4 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
             return Ok(await statisticsService.GetClickStatisticAsync(criteria));
         }
     }
-} 
+}

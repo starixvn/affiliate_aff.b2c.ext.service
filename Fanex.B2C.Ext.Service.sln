@@ -1,15 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33328.57
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.B2C.Ext.Service.WebHost", "src\Fanex.B2C.Ext.Service.WebHost\Fanex.B2C.Ext.Service.WebHost.csproj", "{ED965C69-F9A7-4EA1-98DB-3861482B5CC0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.B2C.Ext.Service.Core", "src\Fanex.B2C.Ext.Service.Core\Fanex.B2C.Ext.Service.Core.csproj", "{102797B9-E2DB-4941-9367-98672D4AB2E7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{E7C07FF7-1968-4E2E-8CA2-65FE4A8CF31D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E7C07FF7-1968-4E2E-8CA2-65FE4A8CF31D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.B2C.Ext.Service.Core.Tests", "src\Fanex.B2C.Ext.Service.Core.Tests\Fanex.B2C.Ext.Service.Core.Tests.csproj", "{5E5029B1-D623-4339-9E92-7E7E222FE50B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.B2C.Ext.Service.Core.Tests", "tests\Fanex.B2C.Ext.Service.Core.Tests\Fanex.B2C.Ext.Service.Core.Tests.csproj", "{5E5029B1-D623-4339-9E92-7E7E222FE50B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.B2C.Ext.Service.WebHost.Tests", "tests\Fanex.B2C.Ext.Service.WebHost.Tests\Fanex.B2C.Ext.Service.WebHost.Tests.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +33,21 @@ Global
 		{5E5029B1-D623-4339-9E92-7E7E222FE50B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E5029B1-D623-4339-9E92-7E7E222FE50B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E5029B1-D623-4339-9E92-7E7E222FE50B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED965C69-F9A7-4EA1-98DB-3861482B5CC0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{102797B9-E2DB-4941-9367-98672D4AB2E7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5E5029B1-D623-4339-9E92-7E7E222FE50B} = {E7C07FF7-1968-4E2E-8CA2-65FE4A8CF31D}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890} = {E7C07FF7-1968-4E2E-8CA2-65FE4A8CF31D}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3094E6CB-189B-4344-9C59-4AAD7DE51762}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5E5029B1-D623-4339-9E92-7E7E222FE50B} = {E7C07FF7-1968-4E2E-8CA2-65FE4A8CF31D}
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,5 @@
-using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Models.Criteria;
+using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.Data.Repository;
 
 namespace Fanex.B2C.Ext.Service.Core.Services
@@ -10,4 +10,4 @@ namespace Fanex.B2C.Ext.Service.Core.Services
 
         public async Task<IEnumerable<ClickStatistic>> GetClickStatisticAsync(ClickStatisticCriteria criteria) => await repository.FetchAsync<ClickStatistic>(criteria).ConfigureAwait(false);
     }
-} 
+}

@@ -1,7 +1,6 @@
-using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Models.Criteria;
+using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Services;
-using Fanex.Data;
 using Fanex.Data.Repository;
 using NSubstitute;
 
@@ -9,12 +8,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
 {
     public class ExchangeServiceTest
     {
-        public ExchangeServiceTest()
-        {
-            DbSettingProviderManager
-             .StartNewSession()
-             .Run();
-        }
+        // Constructor removed - unit tests should not initialize database connections
 
         [Fact]
         public async Task GetDailyExchangeRate_WhenCall_AssignCorrectParrameterAndReturnCorrectResultAsync()

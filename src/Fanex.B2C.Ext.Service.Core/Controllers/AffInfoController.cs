@@ -2,7 +2,7 @@
 using Fanex.B2C.Ext.Service.Core.Authorization;
 using Fanex.B2C.Ext.Service.Core.Models.Criteria;
 using Fanex.B2C.Ext.Service.Core.Services;
-using Microsoft.AspNetCore.Authorization;   
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

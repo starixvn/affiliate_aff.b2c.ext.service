@@ -1,5 +1,5 @@
-using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Models.Criteria;
+using Fanex.B2C.Ext.Service.Core.Models.DTO;
 using Fanex.B2C.Ext.Service.Core.Services;
 using Fanex.Data.Repository;
 using Newtonsoft.Json;
@@ -112,8 +112,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
         public async Task GetClickStatisticAsync_WhenCall_AssignCorrectParameterAndReturnCorrectResultAsync()
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now,
@@ -123,11 +123,11 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
 
             var expectedResult = new List<ClickStatistic>
             {
-                new ClickStatistic 
-                { 
-                    ClickId = 1001, 
-                    AffId = 123, 
-                    AffCode = "AFF001", 
+                new ClickStatistic
+                {
+                    ClickId = 1001,
+                    AffId = 123,
+                    AffCode = "AFF001",
                     AffUserName = "TestUser",
                     UpdatedTime = DateTime.Now,
                     IP = "192.168.1.1",
@@ -171,8 +171,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
         public async Task GetClickStatisticAsync_WhenRepositoryReturnsEmpty_ReturnEmptyList()
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now
@@ -197,8 +197,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
         public async Task GetClickStatisticAsync_WhenRepositoryReturnsNull_ReturnNull()
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now
@@ -225,8 +225,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
         public async Task GetClickStatisticAsync_WithDifferentPagination_CallRepositoryCorrectly(int pageIndex, int pageSize)
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now,
@@ -259,8 +259,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
             // Arrange
             var fromDate = DateTime.Now.AddDays(-30);
             var toDate = DateTime.Now;
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = fromDate,
                 ToDate = toDate
@@ -293,8 +293,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
         public async Task GetClickStatisticAsync_WithDifferentLicenseeCodes_CallRepositoryCorrectly(string licenseeCode)
         {
             // Arrange
-            var criteria = new ClickStatisticCriteria 
-            { 
+            var criteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = licenseeCode,
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now
@@ -328,8 +328,8 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
         {
             // Arrange
             var mediaChannelCriteria = new AffMediaChannelCriteria { LicenseeCode = "12B" };
-            var clickStatisticCriteria = new ClickStatisticCriteria 
-            { 
+            var clickStatisticCriteria = new ClickStatisticCriteria
+            {
                 LicenseeCode = "12B",
                 FromDate = DateTime.Now.AddDays(-7),
                 ToDate = DateTime.Now
@@ -354,4 +354,4 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Services
 
         #endregion
     }
-} 
+}

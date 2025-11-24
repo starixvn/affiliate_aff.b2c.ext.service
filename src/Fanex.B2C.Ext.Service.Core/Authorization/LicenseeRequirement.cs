@@ -6,4 +6,4 @@ namespace Fanex.B2C.Ext.Service.Core.Authorization
     {
         public string LicenseeCode { get; } = licenseeCode;
     }
-} 
+}

@@ -9,7 +9,7 @@ namespace Fanex.B2C.Ext.Service.Core.Authorization
         private readonly IOptions<List<User>> _userListAccessor = userListAccessor;
 
         protected override Task HandleRequirementAsync(
-            AuthorizationHandlerContext context, 
+            AuthorizationHandlerContext context,
             FunctionRequirement requirement)
         {
             var username = context.User.Identity?.Name;
@@ -26,7 +26,7 @@ namespace Fanex.B2C.Ext.Service.Core.Authorization
                 return Task.CompletedTask;
             }
 
-            var hasRequiredFunction = userInfo.SupportedFunctions.Exists(func => 
+            var hasRequiredFunction = userInfo.SupportedFunctions.Exists(func =>
                 string.Equals(func, requirement.FunctionName, StringComparison.OrdinalIgnoreCase));
 
             if (hasRequiredFunction)
@@ -41,4 +41,4 @@ namespace Fanex.B2C.Ext.Service.Core.Authorization
             return Task.CompletedTask;
         }
     }
-} 
+}

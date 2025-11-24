@@ -29,7 +29,7 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
                 return;
             }
 
-            var hasRequiredFunction = userInfo.SupportedFunctions.Exists(func => 
+            var hasRequiredFunction = userInfo.SupportedFunctions.Exists(func =>
                 string.Equals(func, FunctionName, StringComparison.OrdinalIgnoreCase));
 
             if (!hasRequiredFunction)
@@ -48,15 +48,14 @@ namespace Fanex.B2C.Ext.Service.Core.Attributes
                     return;
                 }
 
-                var isValidLicensee = userInfo.SupportedLicensees.Exists(licen => 
+                var isValidLicensee = userInfo.SupportedLicensees.Exists(licen =>
                     string.Equals(criteria.LicenseeCode, licen, StringComparison.OrdinalIgnoreCase));
 
                 if (!isValidLicensee)
                 {
                     context.Result = new UnauthorizedObjectResult("The licensee is either invalid or not authorized to use this function!");
-                    return;
                 }
             }
         }
     }
-} 
+}
