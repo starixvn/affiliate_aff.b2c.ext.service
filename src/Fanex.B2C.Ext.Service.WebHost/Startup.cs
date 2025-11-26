@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ONEbook.UM.DependencyInjection;
+using ONEbook.UM.Services;
 using Sentry.AspNetCore;
 using System.Security.Claims;
 using System.Text;
@@ -104,6 +106,9 @@ namespace Fanex.B2C.Ext.Service.WebHost
         {
             app.UsePingCheck();
             app.UseForwardedHeaders();
+            
+            app.UseWhoAmICheck();
+            
             if (string.Equals(configuration["UseSwagger"], "1"))
             {
                 app.UseSwagger();
@@ -119,7 +124,6 @@ namespace Fanex.B2C.Ext.Service.WebHost
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseWhoAmICheck();
             if (!env.IsDevelopment())
             {
                 app.UseHsts();
@@ -145,6 +149,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
         {
             services.AddSingleton<IDynamicRepository, DynamicRepository>();
 
+            services.AddScoped<IMaintenanceService, MaintenanceService>();
             services.AddScoped<IExchangeService, ExchangeService>();
             services.AddScoped<IAffililateInfoService, AffililateInfoService>();
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
@@ -153,7 +158,7 @@ namespace Fanex.B2C.Ext.Service.WebHost
             services.AddScoped<IPFilterAttribute>();
             services.AddCustomAuthorization();
 
-            services.AddUnderMaintenance(configuration);
+            services.AddOneBookUmForWeb(configuration);
         }
 
         private void ConfigAuthentication(IServiceCollection services)
