@@ -36,7 +36,7 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
                 return StatusCode(403, "The licensee is either invalid or not authorized to use this function!");
             }
 
-            logger.LogInformation($"Ext B2C - Get aff {criteria.LicenseeCode} media channel");
+            logger.LogInformation(message: $"Ext B2C - Get aff {criteria.LicenseeCode} media channel");
             return Ok(await statisticsService.GetAffMediaChannelAsync(criteria));
         }
 
@@ -58,8 +58,43 @@ namespace Fanex.B2C.Ext.Service.Core.Controllers
                 return StatusCode(403, "The licensee is either invalid or not authorized to use this function!");
             }
 
-            logger.LogInformation($"Ext B2C - Get click statistics from {criteria.FromDate} to {criteria.ToDate}");
+            logger.LogInformation(message: $"Ext B2C - Get click statistics from {criteria.FromDate} to {criteria.ToDate}");
             return Ok(await statisticsService.GetClickStatisticAsync(criteria));
         }
+
+        #region OH Statistics Endpoints
+
+        [HttpPost]
+        [Route("api/OH/Campaign")]
+        public Task<IActionResult> GetOHCampaignAsync([FromBody] OHCampaignCriteria criteria)
+            => ExecuteOHQueryAsync(criteria, "Campaign", () => statisticsService.GetOHCampaignAsync(criteria));
+
+        [HttpPost]
+        [Route("api/OH/Component")]
+        public Task<IActionResult> GetOHComponentAsync([FromBody] OHComponentCriteria criteria)
+            => ExecuteOHQueryAsync(criteria, "Component", () => statisticsService.GetOHComponentAsync(criteria));
+
+        [HttpPost]
+        [Route("api/OH/LinkGenerator")]
+        public Task<IActionResult> GetOHLinkGeneratorAsync([FromBody] OHLinkGeneratorCriteria criteria)
+            => ExecuteOHQueryAsync(criteria, "LinkGenerator", () => statisticsService.GetOHLinkGeneratorAsync(criteria));
+
+        [HttpPost]
+        [Route("api/OH/ClickStatistics")]
+        public Task<IActionResult> GetOHClickStatisticsAsync([FromBody] OHClickStatisticsCriteria criteria)
+            => ExecuteOHQueryAsync(criteria, "ClickStatistics", () => statisticsService.GetOHClickStatisticsAsync(criteria));
+
+        private async Task<IActionResult> ExecuteOHQueryAsync<T>(OHStatisticsCriteriaBase criteria, string logName, Func<Task<IEnumerable<T>>> query)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest($"{ModelState}");
+            }
+
+            logger.LogInformation("Ext B2C - Get OH {LogName} from {FromDate} to {ToDate}", logName, criteria.FromDate, criteria.ToDate);
+            return Ok(await query());
+        }
+
+        #endregion
     }
 }

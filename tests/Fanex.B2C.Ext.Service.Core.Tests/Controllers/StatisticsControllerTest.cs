@@ -269,5 +269,224 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Controllers
         }
 
         #endregion
+
+        #region OH Statistics Endpoints Tests
+
+        [Fact]
+        public async Task GetOHCampaignAsync_WhenCall_ReturnOkWithData()
+        {
+            // Arrange
+            var criteria = new OHCampaignCriteria
+            {
+                FromDate = DateTime.Now.AddDays(-7),
+                ToDate = DateTime.Now,
+                PageIndex = 1,
+                PageSize = 100
+            };
+
+            var expectedResult = new List<OHCampaign>
+            {
+                new OHCampaign { CampaignId = 1, CampaignName = "Test Campaign", CampaignCode = "TC001", StatusId = 1 }
+            };
+
+            _statisticsService.GetOHCampaignAsync(Arg.Any<OHCampaignCriteria>()).Returns(expectedResult);
+            var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
+
+            // Act
+            var result = await controller.GetOHCampaignAsync(criteria) as ObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal(expectedResult, result.Value);
+        }
+
+        [Fact]
+        public async Task GetOHCampaignAsync_WhenInvalidModel_ReturnBadRequest()
+        {
+            // Arrange
+            var criteria = new OHCampaignCriteria();
+            var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
+            controller.ModelState.AddModelError("FromDate", "FromDate is required");
+
+            // Act
+            var result = await controller.GetOHCampaignAsync(criteria) as ObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetOHComponentAsync_WhenCall_ReturnOkWithData()
+        {
+            // Arrange
+            var criteria = new OHComponentCriteria
+            {
+                FromDate = DateTime.Now.AddDays(-7),
+                ToDate = DateTime.Now,
+                PageIndex = 1,
+                PageSize = 100
+            };
+
+            var expectedResult = new List<OHComponent>
+            {
+                new OHComponent { ComponentId = 1, ComponentName = "Test Component", ComponentCode = "COMP001", StatusId = 1 }
+            };
+
+            _statisticsService.GetOHComponentAsync(Arg.Any<OHComponentCriteria>()).Returns(expectedResult);
+            var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
+
+            // Act
+            var result = await controller.GetOHComponentAsync(criteria) as ObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal(expectedResult, result.Value);
+        }
+
+        [Fact]
+        public async Task GetOHComponentAsync_WhenInvalidModel_ReturnBadRequest()
+        {
+            // Arrange
+            var criteria = new OHComponentCriteria();
+            var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
+            controller.ModelState.AddModelError("FromDate", "FromDate is required");
+
+            // Act
+            var result = await controller.GetOHComponentAsync(criteria) as ObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetOHLinkGeneratorAsync_WhenCall_ReturnOkWithData()
+        {
+            // Arrange
+            var criteria = new OHLinkGeneratorCriteria
+            {
+                FromDate = DateTime.Now.AddDays(-7),
+                ToDate = DateTime.Now,
+                PageIndex = 1,
+                PageSize = 100
+            };
+
+            var expectedResult = new List<OHLinkGenerator>
+            {
+                new OHLinkGenerator { LinkId = 1, LinkName = "Test Link", IDCode = "LNK001", FullLink = "https://example.com/link1", StatusId = 1 }
+            };
+
+            _statisticsService.GetOHLinkGeneratorAsync(Arg.Any<OHLinkGeneratorCriteria>()).Returns(expectedResult);
+            var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
+
+            // Act
+            var result = await controller.GetOHLinkGeneratorAsync(criteria) as ObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal(expectedResult, result.Value);
+        }
+
+        [Fact]
+        public async Task GetOHLinkGeneratorAsync_WhenInvalidModel_ReturnBadRequest()
+        {
+            // Arrange
+            var criteria = new OHLinkGeneratorCriteria();
+            var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
+            controller.ModelState.AddModelError("FromDate", "FromDate is required");
+
+            // Act
+            var result = await controller.GetOHLinkGeneratorAsync(criteria) as ObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetOHClickStatisticsAsync_WhenCall_ReturnOkWithData()
+        {
+            // Arrange
+            var criteria = new OHClickStatisticsCriteria
+            {
+                FromDate = DateTime.Now.AddDays(-7),
+                ToDate = DateTime.Now,
+                PageIndex = 1,
+                PageSize = 100
+            };
+
+            var expectedResult = new List<OHClickStatistics>
+            {
+                new OHClickStatistics
+                {
+                    ClickId = 1001,
+                    IP = "192.168.1.1",
+                    Browser = "Chrome",
+                    LinkId = 1,
+                    LinkName = "Test Link",
+                    IDCode = "LNK001"
+                }
+            };
+
+            _statisticsService.GetOHClickStatisticsAsync(Arg.Any<OHClickStatisticsCriteria>()).Returns(expectedResult);
+            var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
+
+            // Act
+            var result = await controller.GetOHClickStatisticsAsync(criteria) as ObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal(expectedResult, result.Value);
+        }
+
+        [Fact]
+        public async Task GetOHClickStatisticsAsync_WhenInvalidModel_ReturnBadRequest()
+        {
+            // Arrange
+            var criteria = new OHClickStatisticsCriteria();
+            var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
+            controller.ModelState.AddModelError("FromDate", "FromDate is required");
+
+            // Act
+            var result = await controller.GetOHClickStatisticsAsync(criteria) as ObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
+        }
+
+        [Theory]
+        [InlineData(1, 100)]
+        [InlineData(10, 500)]
+        [InlineData(1, 1000)]
+        public async Task GetOHCampaignAsync_WithValidPagination_ReturnCorrect(int pageIndex, int pageSize)
+        {
+            // Arrange
+            var criteria = new OHCampaignCriteria
+            {
+                FromDate = DateTime.Now.AddDays(-7),
+                ToDate = DateTime.Now,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+
+            var expectedResult = new List<OHCampaign>();
+            _statisticsService.GetOHCampaignAsync(Arg.Any<OHCampaignCriteria>()).Returns(expectedResult);
+            var controller = new StatisticsController(_logger, _statisticsService, _authorizationService);
+
+            // Act
+            var result = await controller.GetOHCampaignAsync(criteria) as ObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+        }
+
+        #endregion
     }
 }

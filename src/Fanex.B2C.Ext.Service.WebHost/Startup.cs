@@ -106,9 +106,9 @@ namespace Fanex.B2C.Ext.Service.WebHost
         {
             app.UsePingCheck();
             app.UseForwardedHeaders();
-            
+
             app.UseWhoAmICheck();
-            
+
             if (string.Equals(configuration["UseSwagger"], "1"))
             {
                 app.UseSwagger();

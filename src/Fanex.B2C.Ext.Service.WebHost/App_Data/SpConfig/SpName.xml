@@ -24,4 +24,10 @@
     <Setting Key="12B_Aff_API_AffMediaChannel_Sel" SpName="Aff_API_AffMediaChannel_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
     <Setting Key="12B_Aff_API_ClickStatistic_Sel" SpName="Aff_API_ClickStatistic_Sel" DbName="DBAFF12B.Affiliate_12B.wsv_afinet" />
   </Function>
+    <Function Name="OH_Statistics_Information">
+	    <Setting Key="OH_API_ClickStatistics_Sel" SpName="OH_API_ClickStatistics_Sel" DbName="DBOH.ONEHub.wsv_oh" />
+	    <Setting Key="OH_API_LinkGenerator_Sel" SpName="OH_API_LinkGenerator_Sel" DbName="DBOH.ONEHub.wsv_oh" />
+	    <Setting Key="OH_API_Campaign_Sel" SpName="OH_API_Campaign_Sel" DbName="DBOH.ONEHub.wsv_oh" />
+	    <Setting Key="OH_API_Component_Sel" SpName="OH_API_Component_Sel" DbName="DBOH.ONEHub.wsv_oh" />
+    </Function>
 </Functions>
