@@ -48,7 +48,7 @@ namespace Fanex.B2C.Ext.Service.Core.Middleware
             result.Add("Client Ip", context.Connection.RemoteIpAddress.ToString());
             result.Add("Actual Client Ip", context.Request.GetClientIP());
             result.Add("Server Time", DateTimeOffset.Now.UtcDateTime.ToString(CultureInfo.InvariantCulture));
-            result.Add("Last Upadted", File.GetCreationTime(typeof(WhoAmIHealthCheck).Assembly.Location).ToString(CultureInfo.InvariantCulture));
+            result.Add("Last Updated", File.GetCreationTime(typeof(WhoAmIHealthCheck).Assembly.Location).ToString(CultureInfo.InvariantCulture));
             result.Add("Host", context.Request.Host);
             result.Add("Schema", context.Request.Scheme);
             result.Add("X-Headers", "---------------------------------");

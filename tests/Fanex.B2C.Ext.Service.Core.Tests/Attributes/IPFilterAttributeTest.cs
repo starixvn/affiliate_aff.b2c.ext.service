@@ -315,14 +315,14 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Attributes
             _actionExecutingContext.Result = fakeResult;
 
             // Setup whitelist with multiple partner ranges
-            _options.Value.Returns(new ApplicationOptions 
-            { 
-                WhiteList = new List<string> 
-                { 
+            _options.Value.Returns(new ApplicationOptions
+            {
+                WhiteList = new List<string>
+                {
                     "203.0.113.0/24",  // Partner 1
                     "198.51.100.0/24", // Partner 2
                     "192.0.2.0/24"     // Partner 3
-                } 
+                }
             });
 
             var connectionInfo = Substitute.For<ConnectionInfo>();
@@ -358,7 +358,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Attributes
             // Assert - Should block access and log error for invalid configuration
             var actualResult = Assert.IsAssignableFrom<ContentResult>(_actionExecutingContext.Result);
             Assert.Equal($"The IP Address: {clientIP} was blocked", actualResult.Content);
-            
+
             // Should log error about invalid whitelist IP
             _logger.Received().LogError($"The WhiteList IP: {invalidWhitelistIP} was invalid - client IP: ${clientIP}");
         }
@@ -413,7 +413,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Attributes
 
             // Assert - Should handle IP range validation correctly
             var actualResult = Assert.IsAssignableFrom<ContentResult>(_actionExecutingContext.Result);
-            
+
             if (shouldAllow)
             {
                 Assert.Equal(fakeContent, actualResult.Content);
@@ -459,13 +459,13 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Attributes
             _actionExecutingContext.Result = fakeResult;
 
             // Setup whitelist with CDN IP ranges
-            _options.Value.Returns(new ApplicationOptions 
-            { 
-                WhiteList = new List<string> 
-                { 
+            _options.Value.Returns(new ApplicationOptions
+            {
+                WhiteList = new List<string>
+                {
                     "203.0.113.0/24",  // CDN Range 1
                     "198.51.100.0/24"  // CDN Range 2
-                } 
+                }
             });
 
             var connectionInfo = Substitute.For<ConnectionInfo>();

@@ -61,25 +61,5 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Middlewares
             //Assert
             Assert.Null(ex);
         }
-
-        [Fact]
-        public void AddUnderMaintenance_WhenCall_NotThrowException()
-        {
-            //Arrange
-            var ex = Record.Exception(() => MiddlewareExtensions.AddUnderMaintenance(_mockServiceCollection, _mockConfiguration));
-
-            //Assert
-            Assert.Null(ex);
-        }
-
-        [Fact]
-        public void UseUnderMaintenance_WhenCall_NotThrowException()
-        {
-            //Arrange
-            var ex = Record.Exception(() => MiddlewareExtensions.UseUnderMaintenance(_mockApplicationBuilder));
-
-            //Assert
-            Assert.Null(ex);
-        }
     }
 }

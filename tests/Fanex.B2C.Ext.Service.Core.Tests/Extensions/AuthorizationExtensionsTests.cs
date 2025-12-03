@@ -24,11 +24,11 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Extensions
             // Assert - Should register authorization handlers
             result.Should().NotBeNull();
             result.Should().BeSameAs(services);
-            
+
             // Verify that authorization handlers are registered in service collection
             var handlerDescriptors = services.Where(s => s.ServiceType == typeof(IAuthorizationHandler)).ToList();
             handlerDescriptors.Should().HaveCount(2, "Should register both FunctionAuthorizationHandler and LicenseeAuthorizationHandler");
-            
+
             var implementationTypes = handlerDescriptors.Select(h => h.ImplementationType).ToList();
             implementationTypes.Should().Contain(typeof(FunctionAuthorizationHandler));
             implementationTypes.Should().Contain(typeof(LicenseeAuthorizationHandler));
@@ -46,7 +46,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Extensions
             // Assert - Should have both function and licensee authorization handlers registered
             var handlerDescriptors = services.Where(s => s.ServiceType == typeof(IAuthorizationHandler)).ToList();
             handlerDescriptors.Should().HaveCount(2, "Should register authorization handlers for B2C API");
-            
+
             var implementationTypes = handlerDescriptors.Select(h => h.ImplementationType).ToList();
             implementationTypes.Should().Contain(typeof(FunctionAuthorizationHandler));
             implementationTypes.Should().Contain(typeof(LicenseeAuthorizationHandler));
@@ -63,10 +63,10 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Extensions
 
             // Assert - Should support multiple authorization handlers for different tenants
             var handlerDescriptors = services.Where(s => s.ServiceType == typeof(IAuthorizationHandler)).ToList();
-            
+
             // Should have at least function and licensee handlers for multi-tenant support
             handlerDescriptors.Should().HaveCount(2, "Should register handlers for multi-tenant support");
-            
+
             // Verify specific handler types are registered
             var implementationTypes = handlerDescriptors.Select(h => h.ImplementationType).ToList();
             implementationTypes.Should().Contain(typeof(FunctionAuthorizationHandler));
@@ -85,7 +85,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Extensions
             // Assert - Should add AffInfo policy
             result.Should().NotBeNull();
             result.Should().BeSameAs(options);
-            
+
             var affInfoPolicy = options.GetPolicy("AffInfo");
             affInfoPolicy.Should().NotBeNull();
             affInfoPolicy.Requirements.Should().HaveCount(1);
@@ -159,7 +159,7 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Extensions
 
             // Assert - Should create policies with function requirements
             var policies = new[] { "AffInfo", "Statistics", "Exchange" };
-            
+
             foreach (var policyName in policies)
             {
                 var policy = options.GetPolicy(policyName);
@@ -182,10 +182,10 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Extensions
             var affInfoPolicy = options.GetPolicy("AffInfo");
             var statisticsPolicy = options.GetPolicy("Statistics");
             var exchangePolicy = options.GetPolicy("Exchange");
-            
+
             var policies = new[] { affInfoPolicy, statisticsPolicy, exchangePolicy };
             policies.Should().AllSatisfy(p => p.Should().NotBeNull());
-            
+
             // Each policy should support function-based authorization that can work with licensee authorization
             foreach (var policy in policies)
             {
@@ -224,12 +224,12 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Extensions
 
             // Assert - Should provide comprehensive security policies for all API endpoints
             var requiredPolicies = new[] { "AffInfo", "Statistics", "Exchange" };
-            
+
             foreach (var requiredPolicy in requiredPolicies)
             {
                 var policy = options.GetPolicy(requiredPolicy);
                 policy.Should().NotBeNull($"{requiredPolicy} policy is required for API endpoint security");
-                
+
                 // Each policy should have appropriate requirements for security
                 policy.Requirements.Should().NotBeEmpty($"{requiredPolicy} policy should have security requirements");
                 policy.Requirements.Should().AllBeOfType<FunctionRequirement>($"{requiredPolicy} should use function-based security");
@@ -249,12 +249,12 @@ namespace Fanex.B2C.Ext.Service.Core.Tests.Extensions
             var affInfoPolicy = options.GetPolicy("AffInfo");
             var statisticsPolicy = options.GetPolicy("Statistics");
             var exchangePolicy = options.GetPolicy("Exchange");
-            
+
             // Should have distinct policies for different functional areas
             affInfoPolicy.Should().NotBeNull("Should have affiliate information access policy");
-            statisticsPolicy.Should().NotBeNull("Should have statistics access policy");  
+            statisticsPolicy.Should().NotBeNull("Should have statistics access policy");
             exchangePolicy.Should().NotBeNull("Should have exchange rate access policy");
-            
+
             // Each policy represents a different access level/role
             var policies = new[] { affInfoPolicy, statisticsPolicy, exchangePolicy };
             policies.Should().HaveCount(3, "Should have at least 3 distinct access policies");
